@@ -6,6 +6,10 @@ CREATE TABLE account (
    nametemp varchar(30) NOT NULL,
    verified boolean NOT NULL DEFAULT false,
    auth_token varchar(64) UNIQUE DEFAULT null,
+   weights_alert boolean DEFAULT TRUE,
+   birth_alert boolean DEFAULT TRUE,
+   event_alert boolean DEFAULT TRUE,
+   com_comment boolean DEFAULT TRUE,
    PRIMARY KEY (email)
 );
 
@@ -82,14 +86,6 @@ CREATE TABLE photo_memo(
    images mediumblob NOT NULL,
 );
 
-/*Home*/
-CREATE TABLE grouptemp (
-   group_id SERIAL UNIQUE NOT NULL,
-   group_name varchar(32) NOT NULL,
-   owner_email varchar(32) NOT NULL,
-   PRIMARY KEY (group_id)
-);
-
 /*animal specices*/
 CREATE TABLE animal_species (species_id serial PRIMARY KEY);
 
@@ -97,7 +93,7 @@ CREATE TABLE animal_species (species_id serial PRIMARY KEY);
 CREATE TABLE animal (
    id SERIAL,
    species int NOT NULL,
-   names varchar(30) NOT NULL,
+   name varchar(30) NOT NULL,
    birth bigint NOT NULL,
    gender smallint NOT NULL,
    attributes text DEFAULT NULL,
@@ -105,23 +101,32 @@ CREATE TABLE animal (
    FOREIGN KEY (species) REFERENCES animal_species(species_id)
 );
 
-/* ////////////H E L P //////////*/
-/*person*/
-CREATE TABLE person_group (
-   group_id int,
-   account_email varchar(32),
-   PRIMARY KEY (group_id, account_email),
-   FOREIGN KEY (group_id) REFERENCES grouptemp(group_id) ON DELETE CASCADE,
-   FOREIGN KEY (account_email) REFERENCES account(email) ON DELETE CASCADE
+/*group*/
+CREATE TABLE group (
+   id SERIAL,
+   owner_id bigint,
+   name VARCHAR(20) NOT NULL,
+   passwd VARCHAR(64),
+   PRIMARY KEY (id),
+   FOREIGN KEY (owner_id) REFERENCES account(id)
 );
 
-/*animal*/
-CREATE TABLE animal_group (
-   group_id int,
-   animal_id int,
-   PRIMARY KEY (animal_id),
-   FOREIGN KEY (group_id) REFERENCES grouptemp(group_id) ON DELETE CASCADE,
-   FOREIGN KEY (animal_id) REFERENCES animal(id) ON DELETE CASCADE
+/*participates*/
+CREATE TABLE participates (
+   group_id int NOT NULL,
+   account_id bigint NOT NULL,
+   PRIMARY KEY (group_id, account_id),
+   FOREIGN KEY (group_id) REFERENCES group(id),
+   FOREIGN KEY (account_id) REFERENCES account(id) 
+);
+
+/*managed*/
+CREATE TABLE managed (
+   group_id int NOT NULL,
+   pet_id int NOT NULL,
+   PRIMARY KEY (group_id, pet_id),
+   FOREIGN KEY (group_id) REFERENCES group(id),
+   FOREIGN KEY (pet_id) REFERENCES animal(id)
 );
 
 /*weight*/
@@ -131,12 +136,4 @@ CREATE TABLE weights (
    weights real NOT NULL,
    PRIMARY KEY (pet_id, measured),
    FOREIGN KEY (pet_id) REFERENCES animal(id) ON DELETE CASCADE
-);
-
-/*<setting>*/
-CREATE TABLE setting(
-   weights_alert boolean,
-   birth_alert boolean,
-   event_alert boolean,
-   com_comment boolean,
 );
