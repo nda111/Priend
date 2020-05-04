@@ -25,6 +25,12 @@
 (X) String GettingName()
 (O) String getName()
 ```
+- If might return null, postfix with 'OrNull'
+```
+public String getNameOrNull() {
+    ...
+}
+```
 - Getter Methods
   - It should be public method
   - Method name should be prefixed with “get”
