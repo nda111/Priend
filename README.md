@@ -55,7 +55,6 @@ public String getNameOrNull() {
   - ```@param``` if have parameters
   - ```@throws``` if throws exception
   - ```@return``` if returns value
-  - ```@since```
 - JavaDoc is mandatory for:
   - Class, Interface
   - public Fields, public Methods
