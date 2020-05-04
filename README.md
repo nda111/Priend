@@ -46,9 +46,15 @@ public String getNameOrNull() {
 - To unregister a Listener method name should prefixed with remove.
 
 ### 7. Coding convention for comment
-- JavaDoc requires:
+- JavaDoc for class and interface requires:
   - ```@deprecated``` if deprecated
   - ```@author```
+  - ```@since```
+  - JavaDoc for method and construtor requires:
+  - ```@deprecated``` if deprecated
+  - ```@param``` if have parameters
+  - ```@throws``` if throws exception
+  - ```@return``` if returns value
   - ```@since```
 - JavaDoc is mandatory for:
   - Class, Interface
