@@ -1,5 +1,11 @@
 package com.gachon.priend.data;
 
+/**
+ * An enumeration that represents sex of animal including weather neutered or not
+ *
+ * @author 유근혁
+ * @since May 4th 2020
+ */
 public enum Sex {
     MALE(true, false), FEMALE(false, false), NEUTERED(true, true), SPAYED(false, true);
 

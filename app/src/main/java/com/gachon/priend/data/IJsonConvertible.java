@@ -4,6 +4,9 @@ import org.json.JSONObject;
 
 /**
  * An interface represents object that is able to converted to JSON object.
+ *
+ * @author 유근혁
+ * @since May 4th 2020
  */
 public interface IJsonConvertible {
 

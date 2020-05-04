@@ -8,6 +8,9 @@ import org.json.JSONObject;
 
 /**
  * A class represents account
+ *
+ * @author 유근혁
+ * @since May 4th 2020
  */
 public final class Account implements IJsonConvertible {
 

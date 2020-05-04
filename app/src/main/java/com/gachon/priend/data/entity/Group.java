@@ -7,6 +7,9 @@ import org.json.JSONObject;
 
 /**
  * A class represents group of managed animal
+ *
+ * @author 유근혁
+ * @since May 4th 2020
  */
 public final class Group implements IJsonConvertible {
 

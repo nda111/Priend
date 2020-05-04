@@ -14,6 +14,9 @@ import java.util.TreeMap;
 
 /**
  * A class represents managed animal
+ *
+ * @author 유근혁
+ * @since May 4th 2020
  */
 public final class Animal implements IJsonConvertible {
 

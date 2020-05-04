@@ -5,6 +5,9 @@ import org.json.JSONObject;
 
 /**
  * A class represents settings
+ *
+ * @author 유근혁
+ * @since May 4th 2020
  */
 public class Settings implements IJsonConvertible {
 
