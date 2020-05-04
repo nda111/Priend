@@ -63,6 +63,9 @@
 
 // Class or Interface header {
 
+    // static Fields
+    // static Methods
+
     // private nested Class
     // protected nested Class
     // public nested Class
