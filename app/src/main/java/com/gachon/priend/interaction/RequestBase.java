@@ -10,6 +10,11 @@ package com.gachon.priend.interaction;
 public abstract class RequestBase<T> {
 
     /**
+     * The address of the web socket server
+     */
+    public static final String SERVER_ADDRESS = "wss://priend.herokuapp.com";
+
+    /**
      * A callback that handles response
      *
      * @param <T> The type of the response
