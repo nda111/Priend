@@ -3,7 +3,7 @@ CREATE TABLE account (
    id bigserial NOT NULL UNIQUE,
    email varchar(32),
    pw varchar(64) NOT NULL,
-   nametemp varchar(30) NOT NULL,
+   name varchar(30) NOT NULL,
    verified boolean NOT NULL DEFAULT false,
    auth_token varchar(64) UNIQUE DEFAULT null,
    weights_alert boolean DEFAULT TRUE,
@@ -16,7 +16,7 @@ CREATE TABLE account (
 /*Email Confirm*/
 CREATE TABLE verifying_hash (
    email varchar(32),
-   hashtemp varchar(64) NOT NULL UNIQUE,
+   hash varchar(64) NOT NULL UNIQUE,
    PRIMARY KEY (email),
    FOREIGN KEY (email) REFERENCES account(email) ON DELETE CASCADE
 );
@@ -25,7 +25,7 @@ CREATE TABLE verifying_hash (
 CREATE TABLE reset_password (
    email varchar(32),
    expire_due bigint NOT NULL,
-   hashtemp varchar(64) NOT NULL UNIQUE,
+   hash varchar(64) NOT NULL UNIQUE,
    used boolean NOT NULL DEFAULT false,
    PRIMARY KEY (email),
    FOREIGN KEY (email) REFERENCES account(email) ON DELETE CASCADE
