@@ -1,4 +1,3 @@
-/*Account*/
 CREATE TABLE account (
    id bigserial NOT NULL UNIQUE,
    email varchar(32),
@@ -12,7 +11,6 @@ CREATE TABLE account (
    com_comment boolean DEFAULT TRUE,
    PRIMARY KEY (email)
 );
-
 /*Email Confirm*/
 CREATE TABLE verifying_hash (
    email varchar(32),
@@ -20,7 +18,6 @@ CREATE TABLE verifying_hash (
    PRIMARY KEY (email),
    FOREIGN KEY (email) REFERENCES account(email) ON DELETE CASCADE
 );
-
 /*Reset Password*/
 CREATE TABLE reset_password (
    email varchar(32),
@@ -30,7 +27,6 @@ CREATE TABLE reset_password (
    PRIMARY KEY (email),
    FOREIGN KEY (email) REFERENCES account(email) ON DELETE CASCADE
 );
-
 /*board*/
 CREATE TABLE board(
    id smallserial,
@@ -40,9 +36,9 @@ CREATE TABLE board(
 
 /*post*/
 CREATE TABLE post(
-   id serial,
+   id bigserial,
    board_id bigserial,
-   writer VARCHAR(30) NOT NULL,
+   writer bigserial NOT NULL,
    writetime bigint NOT NULL,
    content VARCHAR(200) NOT NULL,
    FOREIGN KEY (board_id) REFERENCES board(id),
@@ -53,11 +49,26 @@ CREATE TABLE post(
 /*comment*/
 CREATE TABLE comment (
    post_id bigserial,
-   writer VARCHAR(30) NOT NULL,
+   writer bigserial NOT NULL,
    timewrite bigint NOT NULL,
    content_c VARCHAR(200) NOT NULL,
    FOREIGN KEY (post_id) REFERENCES post(id),
    FOREIGN KEY (writer) REFERENCES account(id)
+);
+/*animal specices*/
+CREATE TABLE animal_species (
+    species_id bigserial PRIMARY KEY
+    );
+/*animal info*/
+CREATE TABLE animal (
+   id bigserial,
+   species int NOT NULL,
+   name varchar(30) NOT NULL,
+   birth bigint NOT NULL,
+   gender smallint NOT NULL,
+   attributes text DEFAULT NULL,
+   PRIMARY KEY (id),
+   FOREIGN KEY (id) REFERENCES animal_species(species_id)
 );
 
 /*calendar*/
@@ -67,8 +78,6 @@ CREATE TABLE memo(
    id bigserial,
    is_word_memo boolean NOT NULL DEFAULT false,
    FOREIGN KEY (animal_id) REFERENCES animal(id),
-   FOREIGN KEY (id) REFERENCES word_memo(wmemo_id),
-   FOREIGN KEY (id) REFERENCES photo_memo(pmemo_id),
    PRIMARY KEY(id)
 );
 
@@ -76,62 +85,47 @@ CREATE TABLE memo(
 CREATE TABLE word_memo(
    wmemo_id bigserial NOT NULL,
    text_content VARCHAR(64),
-   FOREIGN KEY (wmemo_id) REFERENCES memo(memo_id)
+   FOREIGN KEY (wmemo_id) REFERENCES memo(id)
 );
-
 /*photo memo*/
 CREATE TABLE photo_memo(
    pmemo_id bigserial,
    keyword text,
-   images mediumblob NOT NULL,
-);
-
-/*animal specices*/
-CREATE TABLE animal_species (species_id serial PRIMARY KEY);
-
-/*animal info*/
-CREATE TABLE animal (
-   id SERIAL,
-   species int NOT NULL,
-   name varchar(30) NOT NULL,
-   birth bigint NOT NULL,
-   gender smallint NOT NULL,
-   attributes text DEFAULT NULL,
-   PRIMARY KEY (id),
-   FOREIGN KEY (species) REFERENCES animal_species(species_id)
+   images mediumblob NOT NULL
 );
 
 /*group*/
-CREATE TABLE group (
+CREATE TABLE addgroup (
    id SERIAL,
-   owner_id bigint,
+   owner_id bigserial,
    name VARCHAR(20) NOT NULL,
    passwd VARCHAR(64),
    PRIMARY KEY (id),
    FOREIGN KEY (owner_id) REFERENCES account(id)
 );
 
+
 /*participates*/
 CREATE TABLE participates (
-   group_id int NOT NULL,
-   account_id bigint NOT NULL,
+   group_id serial NOT NULL,
+   account_id bigserial NOT NULL,
    PRIMARY KEY (group_id, account_id),
-   FOREIGN KEY (group_id) REFERENCES group(id),
+   FOREIGN KEY (group_id) REFERENCES addgroup(id),
    FOREIGN KEY (account_id) REFERENCES account(id) 
 );
 
 /*managed*/
 CREATE TABLE managed (
-   group_id int NOT NULL,
-   pet_id int NOT NULL,
+   group_id serial NOT NULL,
+   pet_id serial NOT NULL,
    PRIMARY KEY (group_id, pet_id),
-   FOREIGN KEY (group_id) REFERENCES group(id),
+   FOREIGN KEY (group_id) REFERENCES addgroup(id),
    FOREIGN KEY (pet_id) REFERENCES animal(id)
 );
 
 /*weight*/
 CREATE TABLE weights (
-   pet_id int,
+   pet_id serial,
    measured bigint,
    weights real NOT NULL,
    PRIMARY KEY (pet_id, measured),
