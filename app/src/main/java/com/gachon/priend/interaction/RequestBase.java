@@ -38,6 +38,11 @@ public abstract class RequestBase<T> {
     protected T response = null;
 
     /**
+     * Arguments of the response
+     */
+    protected Object[] args = null;
+
+    /**
      * Get the URI of web socket server
      *
      * @return URI of web socket server
@@ -86,7 +91,7 @@ public abstract class RequestBase<T> {
             @Override
             public void onClosed() {
                 RequestBase.this.onClose();
-                responseListener.onResponse(response, null);
+                responseListener.onResponse(response, args);
             }
         }).connect(null);
     }
