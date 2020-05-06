@@ -91,7 +91,7 @@ CREATE TABLE word_memo(
 CREATE TABLE photo_memo(
    pmemo_id bigserial,
    keyword text,
-   images mediumblob NOT NULL
+   images bytea NOT NULL
 );
 
 /*group*/
