@@ -18,7 +18,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".membership.activity.LoginEntryActivity" />
+        <activity android:name=".membership.activity.LoginEntryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".membership.activity.LoginPasswordActivity"
