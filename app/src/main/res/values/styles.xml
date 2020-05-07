@@ -37,4 +37,21 @@
 
     </style>
 
+    <style name="Button.Outlined.Rounded" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+
+        <item name="android:textColor">@color/secondaryDarkColor</item>
+        <item name="rippleColor">@color/secondaryLightColor</item>
+        <item name="cornerRadius">30dp</item>
+
+    </style>
+
+    <style name="Button.Filled.Rounded" parent="@style/Widget.MaterialComponents.Button">
+
+        <item name="backgroundTint">@color/secondaryDarkColor</item>
+        <item name="rippleColor">@color/secondaryLightColor</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">30dp</item>
+
+    </style>
+
 </resources>

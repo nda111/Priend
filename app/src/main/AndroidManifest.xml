@@ -9,12 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp">
+
         <activity android:name=".EntryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".membership.activity.LoginEntryActivity" />
+
+        <activity
+            android:name=".membership.activity.LoginPasswordActivity"
+            android:parentActivityName=".membership.activity.LoginEntryActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".membership.activity.LoginPasswordActivity" />
+        </activity>
+
+        <activity
+            android:name=".membership.activity.RegisterActivity"
+            android:parentActivityName=".membership.activity.LoginEntryActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".membership.activity.LoginPasswordActivity" />
         </activity>
     </application>
 
