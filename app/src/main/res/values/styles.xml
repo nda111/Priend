@@ -54,4 +54,13 @@
 
     </style>
 
+    <style name="TextInputLayout.SecondaryColored" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+        <item name="android:textSize">16sp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="hintTextColor">@color/secondaryDarkColor</item>
+        <item name="boxStrokeColor">@color/secondaryDarkColor</item>
+\
+    </style>
+
 </resources>
