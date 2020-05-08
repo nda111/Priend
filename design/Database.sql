@@ -51,22 +51,21 @@ CREATE TABLE comment (
    post_id bigserial,
    writer bigserial NOT NULL,
    timewrite bigint NOT NULL,
-   content_c VARCHAR(200) NOT NULL,
+   content VARCHAR(200) NOT NULL,
    FOREIGN KEY (post_id) REFERENCES post(id),
    FOREIGN KEY (writer) REFERENCES account(id)
 );
 /*animal specices*/
 CREATE TABLE animal_species (
     species_id bigserial PRIMARY KEY
-    );
+);
 /*animal info*/
 CREATE TABLE animal (
    id bigserial,
    species int NOT NULL,
    name varchar(30) NOT NULL,
    birth bigint NOT NULL,
-   gender smallint NOT NULL,
-   attributes text DEFAULT NULL,
+   sex smallint NOT NULL,
    PRIMARY KEY (id),
    FOREIGN KEY (id) REFERENCES animal_species(species_id)
 );
@@ -77,25 +76,26 @@ CREATE TABLE memo(
    date_time bigint,
    id bigserial,
    is_word_memo boolean NOT NULL DEFAULT false,
-   FOREIGN KEY (animal_id) REFERENCES animal(id),
-   PRIMARY KEY(id)
+   PRIMARY KEY(id),
+   FOREIGN KEY (animal_id) REFERENCES animal(id)
 );
 
 /*word memo*/
 CREATE TABLE word_memo(
-   wmemo_id bigserial NOT NULL,
-   text_content VARCHAR(64),
-   FOREIGN KEY (wmemo_id) REFERENCES memo(id)
+   id bigserial NOT NULL,
+   content VARCHAR(200) NOT NULL,
+   FOREIGN KEY (id) REFERENCES memo(id)
 );
 /*photo memo*/
 CREATE TABLE photo_memo(
-   pmemo_id bigserial,
-   keyword text,
-   images bytea NOT NULL
+   id bigserial NOT NULL,
+   content VARCHAR(200),
+   images bytea NOT NULL,
+   FOREIGN KEY (id) REFERENCES memo(id)
 );
 
 /*group*/
-CREATE TABLE addgroup (
+CREATE TABLE animal_group (
    id SERIAL,
    owner_id bigserial,
    name VARCHAR(20) NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE participates (
    group_id serial NOT NULL,
    account_id bigserial NOT NULL,
    PRIMARY KEY (group_id, account_id),
-   FOREIGN KEY (group_id) REFERENCES addgroup(id),
+   FOREIGN KEY (group_id) REFERENCES animal_group(id),
    FOREIGN KEY (account_id) REFERENCES account(id) 
 );
 
@@ -119,7 +119,7 @@ CREATE TABLE managed (
    group_id serial NOT NULL,
    pet_id serial NOT NULL,
    PRIMARY KEY (group_id, pet_id),
-   FOREIGN KEY (group_id) REFERENCES addgroup(id),
+   FOREIGN KEY (group_id) REFERENCES animal_group(id),
    FOREIGN KEY (pet_id) REFERENCES animal(id)
 );
 
