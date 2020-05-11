@@ -55,6 +55,7 @@ public final class ResetPasswordRequest extends RequestBase<ResetPasswordRequest
     @Override
     protected void onResponse(WebSocketRequest conn, WebSocketRequest.Message message, int paramNumber) {
         super.response = EResponse.fromId(message.getBinaryMessageOrNull()[0]);
+        conn.close();
     }
 
     @Override

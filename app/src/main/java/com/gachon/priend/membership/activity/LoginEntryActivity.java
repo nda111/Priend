@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gachon.priend.R;
 import com.gachon.priend.interaction.RequestBase;
+import com.gachon.priend.interaction.WebSocketRequest;
 import com.gachon.priend.membership.request.EvaluationRequest;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -45,6 +47,35 @@ public class LoginEntryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_entry);
+
+        new RequestBase<String>()
+        {
+            @Override
+            protected String getUri() {
+                return SERVER_ADDRESS + "/ws/echo";
+            }
+
+            @Override
+            protected void onRequest(WebSocketRequest conn) {
+                conn.send("nda111@naver.com");
+            }
+
+            @Override
+            protected void onResponse(WebSocketRequest conn, WebSocketRequest.Message message, int paramNumber) {
+                super.response = message.getTextMessageOrNull();
+                conn.close();
+            }
+
+            @Override
+            protected void onClose() {
+
+            }
+        }.request(new RequestBase.ResponseListener<String>() {
+            @Override
+            public void onResponse(String response, Object[] args) {
+                ((TextInputEditText)findViewById(R.id.login_entry_edit_text_email)).setText(response);
+            }
+        });
 
         /*
          * Initialize GUI Components

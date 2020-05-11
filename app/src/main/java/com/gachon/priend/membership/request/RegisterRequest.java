@@ -63,6 +63,7 @@ public final class RegisterRequest extends RequestBase<RegisterRequest.EResponse
     @Override
     protected void onResponse(WebSocketRequest conn, WebSocketRequest.Message message, int paramNumber) {
         super.response = EResponse.fromId(message.getBinaryMessageOrNull()[0]);
+        conn.close();
     }
 
     @Override

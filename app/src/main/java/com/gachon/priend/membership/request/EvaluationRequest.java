@@ -59,6 +59,7 @@ public final class EvaluationRequest extends RequestBase<EvaluationRequest.EResp
     @Override
     protected void onResponse(WebSocketRequest conn, WebSocketRequest.Message message, int paramNumber) {
         super.response = EResponse.fromId(message.getBinaryMessageOrNull()[0]);
+        conn.close();
     }
 
     @Override

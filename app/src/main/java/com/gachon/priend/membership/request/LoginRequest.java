@@ -78,6 +78,8 @@ public final class LoginRequest extends RequestBase<LoginRequest.EResponse> {
                 e.printStackTrace();
                 super.response = EResponse.SERVER_ERROR;
             }
+
+            conn.close();
         }
     }
 
