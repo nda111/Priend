@@ -72,40 +72,46 @@ public class LoginPasswordActivity extends AppCompatActivity {
 
                     new LoginRequest(email, password).request(new RequestBase.ResponseListener<LoginRequest.EResponse>() {
                         @Override
-                        public void onResponse(LoginRequest.EResponse response, Object[] args) {
-                            switch (response) {
+                        public void onResponse(final LoginRequest.EResponse response, final Object[] args) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
 
-                                case OK:
-                                    Account account = (Account) args[0];
-                                    NowAccountManager.setAccount(LoginPasswordActivity.this, account);
+                                    switch (response) {
 
-                                    if (rememberMeCheckBox.isChecked()) {
-                                        AutoLoginManager.setValue(getApplicationContext(), true, email, password);
-                                    } else {
-                                        AutoLoginManager.setValue(getApplicationContext(), false, null, null);
+                                        case OK:
+                                            Account account = (Account) args[0];
+                                            NowAccountManager.setAccount(LoginPasswordActivity.this, account);
+
+                                            if (rememberMeCheckBox.isChecked()) {
+                                                AutoLoginManager.setValue(getApplicationContext(), true, email, password);
+                                            } else {
+                                                AutoLoginManager.setValue(getApplicationContext(), false, null, null);
+                                            }
+
+                                            Intent intent = new Intent(LoginPasswordActivity.this, HomeActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                                            startActivity(intent);
+                                            break;
+
+                                        case WRONG_PASSWORD:
+                                            Toast.makeText(getApplicationContext(), R.string.login_password_password_wrong, Toast.LENGTH_LONG).show();
+                                            forgotPasswordButton.setVisibility(View.VISIBLE);
+                                            break;
+
+                                        case UNKNOWN_EMAIL:
+                                            Toast.makeText(getApplicationContext(), R.string.login_password_unknown_email, Toast.LENGTH_LONG).show();
+                                            finish();
+                                            break;
+
+                                        case SERVER_ERROR:
+                                        default:
+                                            Toast.makeText(getApplicationContext(), R.string.login_password_server_error, Toast.LENGTH_LONG).show();
+                                            break;
                                     }
-
-                                    Intent intent = new Intent(LoginPasswordActivity.this, HomeActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                                    startActivity(intent);
-                                    break;
-
-                                case WRONG_PASSWORD:
-                                    Toast.makeText(getApplicationContext(), R.string.login_password_password_wrong, Toast.LENGTH_LONG).show();
-                                    forgotPasswordButton.setVisibility(View.VISIBLE);
-                                    break;
-
-                                case UNKNOWN_EMAIL:
-                                    Toast.makeText(getApplicationContext(), R.string.login_password_unknown_email, Toast.LENGTH_LONG).show();
-                                    finish();
-                                    break;
-
-                                case SERVER_ERROR:
-                                default:
-                                    Toast.makeText(getApplicationContext(), R.string.login_password_server_error, Toast.LENGTH_LONG).show();
-                                    break;
-                            }
+                                }
+                            });
                         }
                     });
                 }

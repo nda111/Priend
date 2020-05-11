@@ -68,6 +68,11 @@ public final class LoginRequest extends RequestBase<LoginRequest.EResponse> {
     protected void onResponse(WebSocketRequest conn, WebSocketRequest.Message message, int paramNumber) {
         if (paramNumber == 0) {
             super.response = EResponse.fromId(message.getBinaryMessageOrNull()[0]);
+
+            if (super.response != EResponse.OK)
+            {
+                conn.close();
+            }
         } else {
             try {
                 Account account = new Account();

@@ -48,35 +48,6 @@ public class LoginEntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_entry);
 
-        new RequestBase<String>()
-        {
-            @Override
-            protected String getUri() {
-                return SERVER_ADDRESS + "/ws/echo";
-            }
-
-            @Override
-            protected void onRequest(WebSocketRequest conn) {
-                conn.send("nda111@naver.com");
-            }
-
-            @Override
-            protected void onResponse(WebSocketRequest conn, WebSocketRequest.Message message, int paramNumber) {
-                super.response = message.getTextMessageOrNull();
-                conn.close();
-            }
-
-            @Override
-            protected void onClose() {
-
-            }
-        }.request(new RequestBase.ResponseListener<String>() {
-            @Override
-            public void onResponse(String response, Object[] args) {
-                ((TextInputEditText)findViewById(R.id.login_entry_edit_text_email)).setText(response);
-            }
-        });
-
         /*
          * Initialize GUI Components
          */
@@ -97,7 +68,7 @@ public class LoginEntryActivity extends AppCompatActivity {
 
                     new EvaluationRequest(email.toString()).request(new RequestBase.ResponseListener<EvaluationRequest.EResponse>() {
                         @Override
-                        public void onResponse(EvaluationRequest.EResponse response, Object[] args) {
+                        public void onResponse(final EvaluationRequest.EResponse response, final Object[] args) {
 
                             switch (response) {
                                 case VERIFIED:

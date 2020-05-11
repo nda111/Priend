@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                     } else if (!CompiledPasswordPatterns[5].matcher(password).matches()) {
                         showError(passwordTextInputLayout, R.string.register_message_password_length);
                     }
-                } else if (confirmPassword.length() == 0) {
+                } else if (!confirmPassword.equals(password)) {
                     showError(confirmPasswordTextInputLayout, R.string.register_message_password_not_matches);
                 } else if (name.length() == 0) {
                     showError(nameTextInputLayout, R.string.register_message_name_required);
@@ -97,22 +97,28 @@ public class RegisterActivity extends AppCompatActivity {
                     new RegisterRequest(emailTextView.getText().toString(), password.toString(), name.toString())
                             .request(new RequestBase.ResponseListener<RegisterRequest.EResponse>() {
                                 @Override
-                                public void onResponse(RegisterRequest.EResponse response, Object[] args) {
+                                public void onResponse(final RegisterRequest.EResponse response, final Object[] args) {
 
-                                    switch (response) {
-                                        case OK:
-                                            Toast.makeText(getApplicationContext(), R.string.register_message_welcome, Toast.LENGTH_LONG).show();
-                                            finish();
-                                            break;
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
 
-                                        case SERVER_ERROR:
-                                            Toast.makeText(getApplicationContext(), R.string.register_message_server_error, Toast.LENGTH_LONG).show();
-                                            break;
+                                            switch (response) {
+                                                case OK:
+                                                    Toast.makeText(getApplicationContext(), R.string.register_message_welcome, Toast.LENGTH_LONG).show();
+                                                    finish();
+                                                    break;
 
-                                        default:
-                                            Toast.makeText(getApplicationContext(), R.string.register_message_unexpected_error, Toast.LENGTH_LONG).show();
-                                            break;
-                                    }
+                                                case SERVER_ERROR:
+                                                    Toast.makeText(getApplicationContext(), R.string.register_message_server_error, Toast.LENGTH_LONG).show();
+                                                    break;
+
+                                                default:
+                                                    Toast.makeText(getApplicationContext(), R.string.register_message_unexpected_error, Toast.LENGTH_LONG).show();
+                                                    break;
+                                            }
+                                        }
+                                    });
                                 }
                             });
                 }
