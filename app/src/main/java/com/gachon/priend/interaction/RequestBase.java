@@ -29,7 +29,7 @@ public abstract class RequestBase<T> {
          * @param response The response value
          * @param args Additional response arguments which is optional
          */
-        void onResponse(T response, Object[] args);
+        void onResponse(final T response, final Object[] args);
     }
 
     /**
