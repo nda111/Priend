@@ -72,26 +72,13 @@ CREATE TABLE animal (
 
 /*calendar*/
 CREATE TABLE memo(
-   animal_id SERIAL,
-   date_time bigint,
    id bigserial,
-   is_word_memo boolean NOT NULL DEFAULT false,
+   animal_id SERIAL NOT NULL,
+   date_time bigint NOT NULL,
+   content VARCHAR(200),
+   images bytea DEFAULT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY (animal_id) REFERENCES animal(id)
-);
-
-/*word memo*/
-CREATE TABLE word_memo(
-   id bigserial NOT NULL,
-   content VARCHAR(200) NOT NULL,
-   FOREIGN KEY (id) REFERENCES memo(id)
-);
-/*photo memo*/
-CREATE TABLE photo_memo(
-   id bigserial NOT NULL,
-   content VARCHAR(200),
-   images bytea NOT NULL,
-   FOREIGN KEY (id) REFERENCES memo(id)
 );
 
 /*group*/
