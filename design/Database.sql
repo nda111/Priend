@@ -75,7 +75,8 @@ CREATE TABLE memo(
    id bigserial,
    animal_id SERIAL NOT NULL,
    date_time bigint NOT NULL,
-   content VARCHAR(200),
+   title VARCHAR(20) NOT NULL,
+   content VARCHAR(200) NOT NULL,
    images bytea DEFAULT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY (animal_id) REFERENCES animal(id)
