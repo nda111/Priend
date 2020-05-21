@@ -1,5 +1,8 @@
 package com.gachon.priend.data.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.gachon.priend.data.IJsonConvertible;
 
 import org.json.JSONException;
@@ -11,15 +14,33 @@ import org.json.JSONObject;
  * @author 유근혁
  * @since May 4th 2020
  */
-public final class Group implements IJsonConvertible {
+public final class Group implements IJsonConvertible, Parcelable {
 
     private static String JSON_KEY_ID = "id";
     private static String JSON_KEY_OWNER = "owner";
     private static String JSON_KEY_NAME = "name";
 
+    public static final Creator<Group> CREATOR = new Creator<Group>() {
+        @Override
+        public Group createFromParcel(Parcel in) {
+            return new Group(in);
+        }
+
+        @Override
+        public Group[] newArray(int size) {
+            return new Group[size];
+        }
+    };
+
     private int id = -1;
     private long ownerId = -1;
     private String name = null;
+
+    private Group(Parcel in) {
+        id = in.readInt();
+        ownerId = in.readLong();
+        name = in.readString();
+    }
 
     /**
      * Create an empty instance with default values
@@ -87,5 +108,17 @@ public final class Group implements IJsonConvertible {
 
             return false;
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeLong(ownerId);
+        dest.writeString(name);
     }
 }

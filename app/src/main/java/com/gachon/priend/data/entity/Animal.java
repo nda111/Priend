@@ -1,5 +1,8 @@
 package com.gachon.priend.data.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.gachon.priend.data.IJsonConvertible;
 import com.gachon.priend.data.Sex;
 import com.gachon.priend.data.datetime.Date;
@@ -18,7 +21,7 @@ import java.util.TreeMap;
  * @author 유근혁
  * @since May 4th 2020
  */
-public final class Animal implements IJsonConvertible {
+public final class Animal implements IJsonConvertible, Parcelable {
 
     private static String JSON_KEY_ID = "id";
     private static String JSON_KEY_SPECIES = "species";
@@ -29,12 +32,43 @@ public final class Animal implements IJsonConvertible {
     private static String JSON_KEY_WEIGHTS_DATE = "date";
     private static String JSON_KEY_WEIGHTS_VALUE = "value";
 
+    public final static Creator<Animal> CREATOR = new Creator<Animal>() {
+        @Override
+        public Animal createFromParcel(Parcel source) {
+            return new Animal(source);
+        }
+
+        @Override
+        public Animal[] newArray(int size) {
+            return new Animal[size];
+        }
+    };
+
     private int id = -1;
     private int species = -1;
     private Date birthday = null;
     private String name = null;
     private Sex sex = null;
     private TreeMap<Date, Double> weights = null;
+
+    private Animal(Parcel in) {
+        id = in.readInt();
+        species = in.readInt();
+        birthday = new Date(in.readLong());
+        name = in.readString();
+        sex = Sex.fromShort((short)in.readInt());
+
+        int weightCount = in.readInt();
+        long[] dateArray = new long[weightCount];
+        double[] weightArray = new double[weightCount];
+        in.readLongArray(dateArray);
+        in.readDoubleArray(weightArray);
+
+        weights = new TreeMap<Date, Double>();
+        for (int i = 0; i < weightCount; i++) {
+            weights.put(new Date(dateArray[i]), weightArray[i]);
+        }
+    }
 
     /**
      * Create an empty instance with default values
@@ -250,5 +284,31 @@ public final class Animal implements IJsonConvertible {
 
             return false;
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(species);
+        dest.writeLong(birthday.toMillis());
+        dest.writeString(name);
+        dest.writeInt(sex.toShort());
+
+        long[] dateArray = new long[weights.size()];
+        double[] weightArray = new double[weights.size()];
+        int i = 0;
+        for (Map.Entry<Date, Double> entry : weights.entrySet()) {
+            dateArray[i++] = entry.getKey().toMillis();
+            weightArray[i++] = entry.getValue();
+        }
+
+        dest.writeInt(dateArray.length);
+        dest.writeLongArray(dateArray);
+        dest.writeDoubleArray(weightArray);
     }
 }

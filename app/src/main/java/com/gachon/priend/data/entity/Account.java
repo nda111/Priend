@@ -1,5 +1,8 @@
 package com.gachon.priend.data.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.gachon.priend.data.IJsonConvertible;
 import com.gachon.priend.data.Settings;
 
@@ -12,7 +15,7 @@ import org.json.JSONObject;
  * @author 유근혁
  * @since May 4th 2020
  */
-public final class Account implements IJsonConvertible {
+public final class Account implements IJsonConvertible, Parcelable {
 
     private static String JSON_KEY_ID = "id";
     private static String JSON_KEY_NAME = "name";
@@ -20,11 +23,37 @@ public final class Account implements IJsonConvertible {
     private static String JSON_KEY_AUTH_TOKEN = "authToken";
     private static String JSON_KEY_SETTINGS = "settings";
 
+    public static final Creator<Account> CREATOR = new Creator<Account>() {
+        @Override
+        public Account createFromParcel(Parcel in) {
+            return new Account(in);
+        }
+
+        @Override
+        public Account[] newArray(int size) {
+            return new Account[size];
+        }
+    };
+
     private long id = -1;
     private String name = null;
     private String email = null;
     private String authenticationToken = null;
     private Settings settings = null;
+
+    private Account(Parcel in) {
+        id = in.readLong();
+        name = in.readString();
+        email = in.readString();
+        authenticationToken = in.readString();
+
+        byte flag = in.readByte();
+        settings = new Settings();
+        settings.doWeightAlert = (flag & 0b0001) != 0;
+        settings.doBirthdayAlert = (flag & 0b0010) != 0;
+        settings.doEventAlert = (flag & 0b0100) != 0;
+        settings.doCommentAlert = (flag & 0b1000) != 0;
+    }
 
     /**
      * Create an empty instance with default values
@@ -132,5 +161,21 @@ public final class Account implements IJsonConvertible {
 
             return false;
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(name);
+        dest.writeString(email);
+        dest.writeString(authenticationToken);
+
+        byte flag = (byte) ((settings.doWeightAlert ? 0b0001 : 0) | (settings.doBirthdayAlert ? 0b0010 : 0) | (settings.doEventAlert ? 0b0100 : 0) | (settings.doCommentAlert ? 0b1000 : 0));
+        dest.writeByte(flag);
     }
 }
