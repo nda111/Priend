@@ -76,6 +76,10 @@ public class RegisterActivity extends AppCompatActivity {
                 final Editable confirmPassword = confirmPasswordEditText.getText();
                 final Editable name = nameEditText.getText();
 
+                System.out.println(password.toString());
+                System.out.println(confirmPassword.toString());
+                System.out.println(name.toString());
+
                 if (password.length() == 0) {
                     showError(passwordTextInputLayout, R.string.register_message_password_required);
                 } else if (!CompiledPasswordPatterns[0].matcher(password).matches()) {
@@ -88,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                     } else if (!CompiledPasswordPatterns[5].matcher(password).matches()) {
                         showError(passwordTextInputLayout, R.string.register_message_password_length);
                     }
-                } else if (!confirmPassword.equals(password)) {
+                } else if (!confirmPassword.toString().equals(password.toString())) {
                     showError(confirmPasswordTextInputLayout, R.string.register_message_password_not_matches);
                 } else if (name.length() == 0) {
                     showError(nameTextInputLayout, R.string.register_message_name_required);
