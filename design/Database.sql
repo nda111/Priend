@@ -77,7 +77,7 @@ CREATE TABLE memo(
    date_time bigint NOT NULL,
    title VARCHAR(20) NOT NULL,
    content VARCHAR(200) NOT NULL,
-   images bytea DEFAULT NULL,
+   images TEXT DEFAULT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY (animal_id) REFERENCES animal(id)
 );

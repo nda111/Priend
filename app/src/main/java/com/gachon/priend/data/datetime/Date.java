@@ -1,6 +1,13 @@
 package com.gachon.priend.data.datetime;
 
+import android.annotation.SuppressLint;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
+
+import androidx.annotation.NonNull;
+
+import java.util.Locale;
 
 /**
  * A class representing date.
@@ -126,9 +133,111 @@ public final class Date implements Comparable<Date> {
         return core.getTimeInMillis();
     }
 
+    /**
+     * Format this date into specified form following these flags
+     *
+     * <table border="true" style="border: 1px solid;">
+     *     <tr>
+     *         <th>Symbol</th>
+     *         <th>Meaning</th>
+     *         <th>Example</th>
+     *     </tr>
+     *     <tr>
+     *         <td>GG</td>
+     *         <td>Era</td>
+     *         <td>"AD"</td>
+     *     </tr>
+     *     <tr>
+     *         <td>yy</td>
+     *         <td rowspan="2">Year</td>
+     *         <td>"03"</td>
+     *     </tr>
+     *     <tr>
+     *         <td>yyyy</td>
+     *         <td>"2003"</td>
+     *     </tr>
+     *     <tr>
+     *         <td>M</td>
+     *         <td rowspan="4">Month</td>
+     *         <td>"7", "12"</td>
+     *     </tr>
+     *     <tr>
+     *         <td>MM</td>
+     *         <td>"07", "12"</td>
+     *     </tr>
+     *     <tr>
+     *         <td>MMM</td>
+     *         <td>"Jul"</td>
+     *     </tr>
+     *     <tr>
+     *         <td>MMMM</td>
+     *         <td>"July"</td>
+     *     </tr>
+     *     <tr>
+     *         <td>d</td>
+     *         <td rowspan="2">Day</td>
+     *         <td>"3"</td>
+     *     </tr>
+     *     <tr>
+     *         <td>dd</td>
+     *         <td>"03"</td>
+     *     </tr>
+     * </table>
+     *
+     * @param formatString Format fo the date string
+     * @return Formatted date string
+     */
+    public String toString(@NonNull final String formatString) {
+
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat(formatString);
+
+        return formatter.format(core);
+    }
+
+    /**
+     * Format this date into string with default format of given locale. <br />
+     * Now supports: <br />
+     *
+     * <table border="true" style="border: 1px solid;">
+     *     <tr>
+     *         <th>Locale</th>
+     *         <th>Format</th>
+     *     </tr>
+     *     <tr>
+     *         <td>En-US</td>
+     *         <td>Jul 2, 2020</td>
+     *     </tr>
+     *     <tr>
+     *         <td>Ko-KR</td>
+     *         <td>2020년 7월 2일</td>
+     *     </tr>
+     *     <tr>
+     *         <td>Default</td>
+     *         <td>Jul 2, 2020</td>
+     *     </tr>
+     * </table>
+     * @param locale The locale information to format with
+     * @return Formatted date string
+     */
+    public String toString(@NonNull final Locale locale) {
+
+        if (locale == Locale.KOREA) {
+
+            return this.toString("yyyy년 M월 d일");
+        } else if (locale == Locale.US) {
+
+            return this.toString("MMM d, yyyy");
+        } else {
+
+            return this.toString("MMM d, yyyy");
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other instanceof Date) {
+            this.toString(Locale.KOREA);
             return getYear() == ((Date) other).getYear() && getMonth() == ((Date) other).getMonth() && getDay() == ((Date) other).getDay();
         }
 

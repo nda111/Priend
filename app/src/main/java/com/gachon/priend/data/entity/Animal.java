@@ -198,6 +198,15 @@ public final class Animal implements IJsonConvertible, Parcelable {
     }
 
     /**
+     * Get all weight records in TreeMap<Date, Double> type.
+     *
+     * @return The map of weight associated with date
+     */
+    public TreeMap<Date, Double> getWeights() {
+        return weights;
+    }
+
+    /**
      * Set or update weight at a specific day
      *
      * @param date The date measurement
