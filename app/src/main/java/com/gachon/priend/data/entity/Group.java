@@ -3,7 +3,11 @@ package com.gachon.priend.data.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.gachon.priend.data.IJsonConvertible;
+import com.gachon.priend.data.database.GroupDatabaseHelper;
+import com.gachon.priend.data.database.SQLiteCompatBase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +18,7 @@ import org.json.JSONObject;
  * @author 유근혁
  * @since May 4th 2020
  */
-public final class Group implements IJsonConvertible, Parcelable {
+public final class Group extends SQLiteCompatBase<Group, Integer, GroupDatabaseHelper> implements IJsonConvertible, Parcelable {
 
     private static String JSON_KEY_ID = "id";
     private static String JSON_KEY_OWNER = "owner";
@@ -40,6 +44,13 @@ public final class Group implements IJsonConvertible, Parcelable {
         id = in.readInt();
         ownerId = in.readLong();
         name = in.readString();
+    }
+
+    public Group(int id, long ownerId, @NonNull String name) {
+
+        this.id = id;
+        this.ownerId = ownerId;
+        this.name = name;
     }
 
     /**
@@ -120,5 +131,13 @@ public final class Group implements IJsonConvertible, Parcelable {
         dest.writeInt(id);
         dest.writeLong(ownerId);
         dest.writeString(name);
+    }
+
+    @Override
+    public void copyFrom(@NonNull Group group) {
+
+        this.id = group.id;
+        this.ownerId = group.ownerId;
+        this.name = group.name;
     }
 }

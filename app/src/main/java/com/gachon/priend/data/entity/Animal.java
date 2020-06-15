@@ -3,8 +3,12 @@ package com.gachon.priend.data.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.gachon.priend.data.IJsonConvertible;
+import com.gachon.priend.data.database.SQLiteCompatBase;
 import com.gachon.priend.data.Sex;
+import com.gachon.priend.data.database.AnimalDatabaseHelper;
 import com.gachon.priend.data.datetime.Date;
 import com.gachon.priend.data.datetime.TimeSpan;
 
@@ -21,7 +25,7 @@ import java.util.TreeMap;
  * @author 유근혁
  * @since May 4th 2020
  */
-public final class Animal implements IJsonConvertible, Parcelable {
+public final class Animal extends SQLiteCompatBase<Animal, Long, AnimalDatabaseHelper> implements IJsonConvertible, Parcelable {
 
     private static String JSON_KEY_ID = "id";
     private static String JSON_KEY_SPECIES = "species";
@@ -44,19 +48,19 @@ public final class Animal implements IJsonConvertible, Parcelable {
         }
     };
 
-    private int id = -1;
-    private int species = -1;
+    private long id = -1;
+    private long species = -1;
     private Date birthday = null;
     private String name = null;
     private Sex sex = null;
     private TreeMap<Date, Double> weights = null;
 
     private Animal(Parcel in) {
-        id = in.readInt();
-        species = in.readInt();
+        id = in.readLong();
+        species = in.readLong();
         birthday = new Date(in.readLong());
         name = in.readString();
-        sex = Sex.fromShort((short)in.readInt());
+        sex = Sex.fromShort((short) in.readInt());
 
         int weightCount = in.readInt();
         long[] dateArray = new long[weightCount];
@@ -71,6 +75,26 @@ public final class Animal implements IJsonConvertible, Parcelable {
     }
 
     /**
+     * Create an instance with its specifications
+     *
+     * @param id The ID of the animal
+     * @param species The species ID of the animal
+     * @param birthday The birthday of the animal
+     * @param name the name of the animal
+     * @param sex The sex of the animal
+     * @param weights The weights of the animal in {TreeMap} type
+     */
+    public Animal(long id, long species, @NonNull Date birthday, @NonNull String name, @NonNull Sex sex, @NonNull TreeMap<Date, Double> weights) {
+
+        this.id = id;
+        this.species = species;
+        this.birthday = birthday;
+        this.name = name;
+        this.sex = sex;
+        this.weights = weights;
+    }
+
+    /**
      * Create an empty instance with default values
      */
     public Animal() {
@@ -82,7 +106,7 @@ public final class Animal implements IJsonConvertible, Parcelable {
      *
      * @return The ID
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -91,7 +115,7 @@ public final class Animal implements IJsonConvertible, Parcelable {
      *
      * @return The species ID
      */
-    public int getSpecies() {
+    public long getSpecies() {
         return species;
     }
 
@@ -110,6 +134,7 @@ public final class Animal implements IJsonConvertible, Parcelable {
 
     /**
      * Get the birthday
+     *
      * @return The birthday
      */
     public Date getBirthday() {
@@ -162,6 +187,7 @@ public final class Animal implements IJsonConvertible, Parcelable {
 
     /**
      * Set sex value if not null
+     *
      * @param sex Sex value
      */
     public void setSex(Sex sex) {
@@ -209,7 +235,7 @@ public final class Animal implements IJsonConvertible, Parcelable {
     /**
      * Set or update weight at a specific day
      *
-     * @param date The date measurement
+     * @param date   The date measurement
      * @param weight Weight value at the day
      */
     public void setWeight(Date date, double weight) {
@@ -263,11 +289,11 @@ public final class Animal implements IJsonConvertible, Parcelable {
     @Override
     public boolean readJson(JSONObject json) {
         try {
-            int id = json.getInt(JSON_KEY_ID);
-            int species = json.getInt(JSON_KEY_SPECIES);
+            long id = json.getLong(JSON_KEY_ID);
+            long species = json.getLong(JSON_KEY_SPECIES);
             long birthday = json.getLong(JSON_KEY_BIRTHDAY);
             String name = json.getString(JSON_KEY_NAME);
-            short sex = (short)json.getInt(JSON_KEY_SEX);
+            short sex = (short) json.getInt(JSON_KEY_SEX);
             JSONArray weightArray = json.getJSONArray(JSON_KEY_WEIGHTS);
             TreeMap<Date, Double> weights = new TreeMap<>();
 
@@ -302,8 +328,8 @@ public final class Animal implements IJsonConvertible, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeInt(species);
+        dest.writeLong(id);
+        dest.writeLong(species);
         dest.writeLong(birthday.toMillis());
         dest.writeString(name);
         dest.writeInt(sex.toShort());
@@ -319,5 +345,16 @@ public final class Animal implements IJsonConvertible, Parcelable {
         dest.writeInt(dateArray.length);
         dest.writeLongArray(dateArray);
         dest.writeDoubleArray(weightArray);
+    }
+
+    @Override
+    public void copyFrom(@NonNull Animal animal) {
+
+        this.id = animal.id;
+        this.species = animal.species;
+        this.birthday = animal.birthday;
+        this.name = animal.name;
+        this.sex = animal.sex;
+        this.weights = animal.weights;
     }
 }
