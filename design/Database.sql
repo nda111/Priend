@@ -62,7 +62,7 @@ CREATE TABLE animal_species (
 /*animal info*/
 CREATE TABLE animal (
    id bigserial,
-   species int NOT NULL,
+   species bigint NOT NULL,
    name varchar(30) NOT NULL,
    birth bigint NOT NULL,
    sex smallint NOT NULL,
