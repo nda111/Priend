@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/gallery_or_camera_button_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="clip_horizontal|center_vertical"
+        android:text="@string/gallery_or_camera_gallery"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/ic_photo_library_black_24dp"
+        app:iconTint="@color/secondaryColor" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/gallery_or_camera_button_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="clip_horizontal|center_vertical"
+        android:text="@string/gallery_or_camera_camera"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/ic_photo_camera_black_24dp"
+        app:iconTint="@color/secondaryColor" />
+</LinearLayout>
