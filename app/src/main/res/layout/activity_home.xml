@@ -4,6 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".home.activity.HomeActivity">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/home_search_view_entity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/home_text_query_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_recycler_view_entity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_search_view_entity" />
+
+    <com.leinardi.android.speeddial.SpeedDialView
+        android:id="@+id/home_speed_dial_view_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:sdMainFabClosedBackgroundColor="@color/primaryColor"
+        app:sdMainFabClosedIconColor="@color/white"
+        app:sdMainFabClosedSrc="@drawable/ic_add_white_36dp"
+        app:sdMainFabOpenedBackgroundColor="@color/primaryColor"
+        app:sdMainFabOpenedIconColor="@color/white"
+        app:sdMainFabOpenedSrc="@drawable/ic_close_white_36dp"
+        app:sdUseReverseAnimationOnClose="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
