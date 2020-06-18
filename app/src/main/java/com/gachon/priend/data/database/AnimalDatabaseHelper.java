@@ -12,7 +12,9 @@ import androidx.annotation.Nullable;
 import com.gachon.priend.data.Sex;
 import com.gachon.priend.data.datetime.Date;
 import com.gachon.priend.data.entity.Animal;
+import com.gachon.priend.interaction.RequestBase;
 
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -29,19 +31,31 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
     public static final String COL_NAME_DATE = "date";
     public static final String COL_NAME_WEIGHT = "weight";
 
-    public AnimalDatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public static final String TABLE_NAME_SPECIES = "species";
+    public static final String COL_NAME_SPECIES_ID = "id";
+    public static final String COL_NAME_EN_US = "name_en_us";
+    public static final String COL_NAME_KO_KR = "name_ko_kr";
+
+    public AnimalDatabaseHelper(@Nullable Context context) {
+        super(context, Database.NAME, null, Database.VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        db.execSQL("CREATE TABLE " + TABLE_NAME_SPECIES + " (" +
+                COL_NAME_SPECIES_ID  + " INTEGER PRIMARY KEY," +
+                COL_NAME_EN_US + " TEXT UNIQUE," +
+                COL_NAME_KO_KR + " TEXT UNIQUE" +
+                ");");
 
         db.execSQL("CREATE TABLE " + TABLE_NAME_ANIMAL + " (" +
                 COL_NAME_ID + " INTEGER PRIMARY KEY," +
                 COL_NAME_SPECIES + " INTEGER NOT NULL," +
                 COL_NAME_NAME + " TEXT NOT NULL," +
                 COL_NAME_BIRTH + " INTEGER NOT NULL," +
-                COL_NAME_SEX + " INTEGER NOT NULL" +
+                COL_NAME_SEX + " INTEGER NOT NULL," +
+                "FOREIGN KEY (" + COL_NAME_SPECIES + ")  REFERENCES " + TABLE_NAME_SPECIES + "(" + COL_NAME_SPECIES_ID + ")" +
                 ");");
 
         db.execSQL("CREATE TABLE " + TABLE_NAME_WEIGHTS + " (" +
@@ -56,18 +70,11 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ANIMAL + ";");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_WEIGHTS + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ANIMAL + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SPECIES + ";");
 
         this.onCreate(db);
-    }
-
-    @Override
-    public void onOpen(SQLiteDatabase db) {
-
-        super.onOpen(db);
-
-        clear();
     }
 
     @Override
@@ -175,5 +182,38 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
 
         db.execSQL("DELETE FROM " + TABLE_NAME_ANIMAL + ";");
         db.execSQL("DELETE FROM " + TABLE_NAME_WEIGHTS + ";");
+    }
+
+    /**
+     * Download species list from server
+     */
+    public void downloadSpecies() {
+        clearSpecies();
+
+        new SpeciesListRequest().request(new RequestBase.ResponseListener<SpeciesListRequest.EResponse>() {
+            @Override
+            public void onResponse(SpeciesListRequest.EResponse response, Object[] args) {
+
+                final SQLiteDatabase db = getWritableDatabase();
+                if (response == SpeciesListRequest.EResponse.OK) {
+                    final LinkedList<SpeciesListRequest.Species> speciesList = (LinkedList<SpeciesListRequest.Species>) args[0];
+
+                    for (SpeciesListRequest.Species species : speciesList) {
+                        db.execSQL("INSERT INTO " + TABLE_NAME_SPECIES + " VALUES(" +
+                                species.id + ", " +
+                                "'" + species.en_us + "', " +
+                                "'" + species.ko_kr + "'" +
+                                ");");
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Clear species list from the database
+     */
+    public void clearSpecies() {
+        getWritableDatabase().execSQL("DELETE FROM " + TABLE_NAME_SPECIES + ";");
     }
 }
