@@ -57,7 +57,9 @@ CREATE TABLE comment (
 );
 /*animal specices*/
 CREATE TABLE animal_species (
-    species_id bigserial PRIMARY KEY
+    species_id bigserial PRIMARY KEY,
+    en_us TEXT UNIQUE,
+    ko_kr TEXT UNIQUE
 );
 /*animal info*/
 CREATE TABLE animal (
