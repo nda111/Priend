@@ -210,6 +210,24 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
         });
     }
 
+    public SpeciesListRequest.Species[] getAllSpecies() {
+
+        final SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME_SPECIES + ";", null);
+
+        final SpeciesListRequest.Species[] result = new SpeciesListRequest.Species[cursor.getCount()];
+        for (int i = 0; cursor.moveToNext(); i++) {
+            final long id = cursor.getLong(0);
+            final String en_us = cursor.getString(1);
+            final String ko_kr = cursor.getString(2);
+
+            result[i] = new SpeciesListRequest.Species(id, en_us, ko_kr);
+        }
+        cursor.close();
+
+        return result;
+    }
+
     /**
      * Clear species list from the database
      */

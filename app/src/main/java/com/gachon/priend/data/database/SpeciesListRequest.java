@@ -13,13 +13,13 @@ import java.util.LinkedList;
 
 public class SpeciesListRequest extends RequestBase<SpeciesListRequest.EResponse> {
 
-    public class Species {
+    public static class Species {
 
-        public int id;
+        public long id;
         public String en_us;
         public String ko_kr;
 
-        public Species(int id, @NonNull String en_us, @NonNull String ko_kr) {
+        public Species(long id, @NonNull String en_us, @NonNull String ko_kr) {
             this.id = id;
             this.en_us = en_us;
             this.ko_kr = ko_kr;
@@ -83,7 +83,7 @@ public class SpeciesListRequest extends RequestBase<SpeciesListRequest.EResponse
                     for (int i = 0; i < array.length(); i++) {
                         final JSONObject set = array.getJSONObject(i);
 
-                        final int id = set.getInt(JSON_KEY_ID);
+                        final long id = set.getLong(JSON_KEY_ID);
                         final String en_us = set.getString(JSON_KEY_EN_US);
                         final String ko_kr = set.getString(JSON_KEY_KO_KR);
 
