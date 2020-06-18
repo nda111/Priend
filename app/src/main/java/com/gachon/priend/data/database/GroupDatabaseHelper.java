@@ -23,8 +23,8 @@ public class GroupDatabaseHelper extends SQLiteOpenHelper implements ISQLiteClas
     public static final String COL_NAME_GROUP_ID = "group_id";
     public static final String COL_NAME_ANIMAL_ID = "animal_id";
 
-    public GroupDatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public GroupDatabaseHelper(@Nullable Context context) {
+        super(context, Database.NAME, null, Database.VERSION);
     }
 
     @Override
