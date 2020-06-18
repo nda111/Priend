@@ -53,8 +53,12 @@
     <string name="animal_text_weight">Weight</string>
     <string name="animal_text_password">Group password</string>
     <string name="animal_text_register">Register</string>
-    <string name="animal_text_edit">Edit</string>
+    <string name="animal_text_save">Save</string>
     <string name="animal_message_deletion_ok">Successfully deleted</string>
+    <string name="animal_message_register_ok">Successfully registered</string>
+    <string name="animal_message_edit_ok">Successfully edited.</string>
+    <string name="animal_message_error_group_not_exists">The group does not exists.</string>
+    <string name="animal_message_error_animal_not_exists">The animal does not exists.</string>
     <string name="animal_message_error_password_not_matches">Password not matches.</string>
     <string name="animal_message_error_enter_password">Please enter the group password.</string>
     <string name="animal_message_error_enter_name">What is his/her name?</string>
