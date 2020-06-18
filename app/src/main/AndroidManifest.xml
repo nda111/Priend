@@ -46,7 +46,7 @@
                 android:value=".membership.activity.LoginPasswordActivity" />
         </activity>
 
-        <activity android:name=".HomeActivity">
+        <activity android:name=".home.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

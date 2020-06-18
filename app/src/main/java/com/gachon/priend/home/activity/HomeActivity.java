@@ -1,4 +1,4 @@
-package com.gachon.priend;
+package com.gachon.priend.home.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
