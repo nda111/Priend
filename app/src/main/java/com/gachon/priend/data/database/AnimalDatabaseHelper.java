@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,7 +45,7 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("CREATE TABLE " + TABLE_NAME_SPECIES + " (" +
-                COL_NAME_SPECIES_ID  + " INTEGER PRIMARY KEY," +
+                COL_NAME_SPECIES_ID + " INTEGER PRIMARY KEY," +
                 COL_NAME_EN_US + " TEXT UNIQUE," +
                 COL_NAME_KO_KR + " TEXT UNIQUE" +
                 ");");
@@ -59,9 +60,9 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
                 ");");
 
         db.execSQL("CREATE TABLE " + TABLE_NAME_WEIGHTS + " (" +
-                COL_NAME_ID + "INTEGER, " +
-                COL_NAME_DATE + "INTEGER, " +
-                COL_NAME_WEIGHT + "REAL, " +
+                COL_NAME_ID + " INTEGER, " +
+                COL_NAME_DATE + " INTEGER, " +
+                COL_NAME_WEIGHT + " REAL, " +
                 "PRIMARY KEY (" + COL_NAME_ID + ", " + COL_NAME_WEIGHT + "), " +
                 "FOREIGN KEY (" + COL_NAME_ID + ")  REFERENCES " + TABLE_NAME_ANIMAL + "(" + COL_NAME_ID + ")" +
                 ");");
@@ -69,6 +70,16 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_WEIGHTS + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ANIMAL + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SPECIES + ";");
+
+        this.onCreate(db);
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_WEIGHTS + ";");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ANIMAL + ";");
@@ -189,6 +200,8 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
      */
     public void downloadSpecies() {
         clearSpecies();
+
+        Log.d("HomeActivity", "Species request");
 
         new SpeciesListRequest().request(new RequestBase.ResponseListener<SpeciesListRequest.EResponse>() {
             @Override
