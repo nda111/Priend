@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.gachon.priend.data.entity.Account;
+import com.gachon.priend.home.activity.HomeActivity;
 import com.gachon.priend.interaction.RequestBase;
 import com.gachon.priend.membership.AutoLoginManager;
 import com.gachon.priend.membership.NowAccountManager;

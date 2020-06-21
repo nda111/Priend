@@ -55,11 +55,12 @@ public class GroupDatabaseHelper extends SQLiteOpenHelper implements ISQLiteClas
     }
 
     @Override
-    public void onOpen(SQLiteDatabase db) {
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        super.onOpen(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_GROUP + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_MANAGED + ";");
 
-        clear();
+        onCreate(db);
     }
 
     @Override
