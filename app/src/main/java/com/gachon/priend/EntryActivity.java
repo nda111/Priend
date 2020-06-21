@@ -1,5 +1,6 @@
 package com.gachon.priend;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.AccountManager;
@@ -28,7 +29,11 @@ public class EntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
 
-        String[] parameters = AutoLoginManager.getValueOrNull(this);
+        final ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.hide();
+
+        final String[] parameters = AutoLoginManager.getValueOrNull(this);
 
         if (parameters != null && parameters[0] != null && parameters[1] != null) {
             new LoginRequest(parameters[0], parameters[1]).request(new RequestBase.ResponseListener<LoginRequest.EResponse>() {
@@ -52,7 +57,24 @@ public class EntryActivity extends AppCompatActivity {
                 }
             });
         } else {
-            gotoActivity(LoginEntryActivity.class);
+            // Show logo
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            gotoActivity(LoginEntryActivity.class);
+                        }
+                    });
+                }
+            }).start();
         }
     }
 

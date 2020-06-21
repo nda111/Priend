@@ -119,6 +119,9 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         entityRecyclerView.setLayoutManager(layoutManager);
 
+        GroupDatabaseHelper groupDb = new GroupDatabaseHelper(this);
+        groupDb.getWritableDatabase();
+
         AnimalDatabaseHelper animalDb = new AnimalDatabaseHelper(this);
         animalDb.downloadSpecies();
     }
