@@ -65,7 +65,7 @@
                 <activity android:name=".calendar.activity.CalendarSelectionActivity">
                     <meta-data
                         android:name="android.support.PARENT_ACTIVITY"
-                        android:value=".HomeActivity" />
+                        android:value=".home.activity.HomeActivity" />
                 </activity>
                 <activity android:name=".calendar.activity.RecordActivity">
                     <meta-data
