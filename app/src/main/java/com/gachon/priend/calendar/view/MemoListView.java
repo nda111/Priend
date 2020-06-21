@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachon.priend.R;
@@ -124,7 +125,9 @@ public final class MemoListView extends RecyclerView {
         @NonNull
         @Override
         public MemoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_memo_list, parent);
+            final LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.item_memo_list, parent, false);
+
             return new MemoViewHolder(view);
         }
 
@@ -150,10 +153,12 @@ public final class MemoListView extends RecyclerView {
 
     public MemoListView(@NonNull Context context) {
         super(context);
+        this.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     public MemoListView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        this.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     /**
