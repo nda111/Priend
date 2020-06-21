@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.gachon.priend.HomeActivity;
+import com.gachon.priend.home.activity.HomeActivity;
 import com.gachon.priend.R;
 import com.gachon.priend.data.entity.Account;
 import com.gachon.priend.interaction.RequestBase;

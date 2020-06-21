@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         android:usesCleartextTraffic="true">
-
         <activity android:name=".EntryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".membership.activity.LoginEntryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +27,6 @@
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".membership.activity.LoginPasswordActivity"
             android:parentActivityName=".membership.activity.LoginEntryActivity">
@@ -37,7 +34,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".membership.activity.LoginPasswordActivity" />
         </activity>
-
         <activity
             android:name=".membership.activity.RegisterActivity"
             android:parentActivityName=".membership.activity.LoginEntryActivity">
@@ -45,13 +41,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".membership.activity.LoginPasswordActivity" />
         </activity>
-
-        <activity android:name=".HomeActivity">
+        <activity android:name=".home.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".home.activity.GroupActivity"
+            android:parentActivityName=".home.activity.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".home.activity.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".home.activity.AnimalActivity"
+            android:parentActivityName=".home.activity.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".home.activity.HomeActivity" />
         </activity>
     </application>
 
