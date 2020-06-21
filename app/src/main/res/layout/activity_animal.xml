@@ -67,12 +67,15 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:hint="@string/animal_text_birthday">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/animal_edit_text_birthday"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -123,6 +126,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:hint="@string/animal_text_weight"
                 android:visibility="gone"
                 app:helperTextTextColor="@color/design_default_color_error"
@@ -142,6 +146,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:hint="@string/animal_text_password"
                 app:endIconMode="password_toggle"
                 app:helperTextTextColor="@color/design_default_color_error"
