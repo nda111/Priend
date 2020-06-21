@@ -1,13 +1,15 @@
 package com.gachon.priend.membership.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.gachon.priend.HomeActivity;
+import com.gachon.priend.home.activity.HomeActivity;
 import com.gachon.priend.R;
 import com.gachon.priend.data.entity.Account;
 import com.gachon.priend.interaction.RequestBase;
@@ -29,6 +31,7 @@ import com.google.android.material.textview.MaterialTextView;
  */
 public class LoginPasswordActivity extends AppCompatActivity {
 
+    private ImageButton backButton = null;
     private MaterialTextView emailTextView = null;
     private TextInputLayout passwordTextInputLayout = null;
     private TextInputEditText passwordEditText = null;
@@ -41,17 +44,30 @@ public class LoginPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_password);
 
+        final ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.hide();
+
         final Intent intent = getIntent();
 
         /*
          * Initialize GUI Components
          */
+        backButton = findViewById(R.id.login_password_button_back);
         emailTextView = findViewById(R.id.login_password_text_view_email);
         passwordTextInputLayout = findViewById(R.id.login_password_text_input_layout_password);
         passwordEditText = findViewById(R.id.login_password_edit_text_password);
         rememberMeCheckBox = findViewById(R.id.login_password_check_box_remember_me);
         loginButton = findViewById(R.id.login_password_button_login);
         forgotPasswordButton = findViewById(R.id.login_password_button_forgot_password);
+
+        // backButton
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         // emailTextView
         emailTextView.setText(intent.getStringExtra(LoginEntryActivity.EXTRA_KEY_EMAIL));
@@ -69,6 +85,8 @@ public class LoginPasswordActivity extends AppCompatActivity {
                     passwordTextInputLayout.setHelperText(null);
 
                     final String email = emailTextView.getText().toString();
+
+                    setGuiEnabled(false);
 
                     new LoginRequest(email, password).request(new RequestBase.ResponseListener<LoginRequest.EResponse>() {
                         @Override
@@ -110,6 +128,13 @@ public class LoginPasswordActivity extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(), R.string.login_password_server_error, Toast.LENGTH_LONG).show();
                                             break;
                                     }
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            setGuiEnabled(true);
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -125,6 +150,7 @@ public class LoginPasswordActivity extends AppCompatActivity {
 
                 final String email = emailTextView.getText().toString();
 
+                setGuiEnabled(false);
                 new ResetPasswordRequest(email).request(new RequestBase.ResponseListener<ResetPasswordRequest.EResponse>() {
                     @Override
                     public void onResponse(ResetPasswordRequest.EResponse response, Object[] args) {
@@ -141,9 +167,24 @@ public class LoginPasswordActivity extends AppCompatActivity {
 
                                 break;
                         }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                setGuiEnabled(true);
+                            }
+                        });
                     }
                 });
             }
         });
+    }
+
+    private void setGuiEnabled(boolean enabled) {
+        backButton.setVisibility(enabled ? View.VISIBLE : View.GONE);
+        passwordEditText.setEnabled(enabled);
+        rememberMeCheckBox.setEnabled(enabled);
+        loginButton.setEnabled(enabled);
+        forgotPasswordButton.setEnabled(enabled);
     }
 }

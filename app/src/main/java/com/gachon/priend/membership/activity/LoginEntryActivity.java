@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gachon.priend.R;
@@ -48,6 +49,10 @@ public class LoginEntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_entry);
 
+        final ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.hide();
+
         /*
          * Initialize GUI Components
          */
@@ -65,6 +70,8 @@ public class LoginEntryActivity extends AppCompatActivity {
                     showError(emailTextInputLayout, R.string.login_entry_message_require_email);
                 } else if (CompiledEmailPattern.matcher(email).matches()) { // if is email format
                     emailTextInputLayout.setHelperText(null);
+
+                    setGuiEnabled(false);
 
                     new EvaluationRequest(email.toString()).request(new RequestBase.ResponseListener<EvaluationRequest.EResponse>() {
                         @Override
@@ -99,6 +106,13 @@ public class LoginEntryActivity extends AppCompatActivity {
                                     });
                                     break;
                             }
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    setGuiEnabled(true);
+                                }
+                            });
                         }
                     });
                 } else { // not an email
@@ -106,6 +120,11 @@ public class LoginEntryActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setGuiEnabled(boolean enabled) {
+        emailEditText.setEnabled(enabled);
+        nextButton.setEnabled(enabled);
     }
 
     private void gotoActivity(Class<?> cls, String email) {

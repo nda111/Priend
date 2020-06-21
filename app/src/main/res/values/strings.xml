@@ -5,7 +5,7 @@
     <string name="login_entry_text_next">Next</string>
     <string name="login_entry_message_require_email">You have to enter an email.</string>
     <string name="login_entry_message_not_verified">You have to verify your email first.</string>
-    <string name="login_entry_message_server_error">There is an error occurred on the server. Please try again.</string>
+    <string name="login_entry_message_server_error">There is an error occurred on the server.&#10;Please try again.</string>
 
     <string name="login_password_text_password">Password</string>
     <string name="login_password_text_login">Login</string>
@@ -14,9 +14,9 @@
     <string name="login_password_password_wrong">Password not matches.</string>
     <string name="login_password_forgot_password">Did you forget your password?</string>
     <string name="login_password_unknown_email">This account has been deleted or never existed.</string>
-    <string name="login_password_server_error">Failed to login due to a server error. Please try again.</string>
+    <string name="login_password_server_error">Failed to login due to a server error.&#10;Please try again.</string>
     <string name="login_password_reset_ok">Priend sent a password reset link. Click the link within 1 week or you\'ll need to request a new one.</string>
-    <string name="login_password_reset_server_error">Failed to create a link due to a server error. Please try again.</string>
+    <string name="login_password_reset_server_error">Failed to create a link due to a server error.&#10;Please try again.</string>
 
     <string name="register_text_password">Password</string>
     <string name="register_text_confirm_password">Confirm password</string>
@@ -30,9 +30,61 @@
     <string name="register_message_password_not_matches">Password not matches</string>
     <string name="register_message_name_required">You must enter your name.</string>
     <string name="register_message_welcome">Welcome! Please verify your email to login.</string>
-    <string name="register_message_server_error">Failed to register due to a server error. Please try again.</string>
+    <string name="register_message_server_error">Failed to register due to a server error.&#10;Please try again.</string>
     <string name="register_message_unexpected_error">Failed to register due to an unexpected error.</string>
 
+    <string name="home_text_query_hint">Search animals &amp; groups</string>
+    <string name="home_age_unit_year">Years</string>
+    <string name="home_age_unit_month">Months</string>
+    <string name="home_age.unit_day">Days</string>
+    <string name="home_weight_unit_kg" translatable="false">Kg</string>
+    <string name="home_message_download_ok">List updated</string>
+    <string name="home_message_error_account">Failed due to an account error.</string>
+    <string name="home_message_error_server">Failed due to a server error.&#10;Please try again.</string>
+    <string name="home_text_menu_settings">Settings</string>
+    <string name="home_text_menu_hospitals">Hospitals</string>
+    <string name="home_text_menu_community">Community</string>
+
+    <string name="animal_text_name">Name</string>
+    <string name="animal_text_birthday">Birthday</string>
+    <string name="animal_text_sex_female">Female</string>
+    <string name="animal_text_sex_male">Male</string>
+    <string name="animal_text_sex_neutered_or_spayed">Neutered or Spayed</string>
+    <string name="animal_text_weight">Weight</string>
+    <string name="animal_text_password">Group password</string>
+    <string name="animal_text_register">Register</string>
+    <string name="animal_text_save">Save</string>
+    <string name="animal_message_deletion_ok">Successfully deleted</string>
+    <string name="animal_message_register_ok">Successfully registered</string>
+    <string name="animal_message_edit_ok">Successfully edited.</string>
+    <string name="animal_message_error_group_not_exists">The group does not exists.</string>
+    <string name="animal_message_error_animal_not_exists">The animal does not exists.</string>
+    <string name="animal_message_error_password_not_matches">Password not matches.</string>
+    <string name="animal_message_error_enter_password">Please enter the group password.</string>
+    <string name="animal_message_error_enter_name">What is his/her name?</string>
+    <string name="animal_message_error_enter_weight">How much he/she weighs?</string>
+    <string name="animal_message_error_account">Failed due to an account error.</string>
+    <string name="animal_message_error_server">Failed due to a server error.&#10;Please try again.</string>
+    <string name="animal_weight_unit_kg" translatable="false">Kg</string>
+
+    <string name="group_text_add_group">Add Group</string>
+    <string name="group_message_add_group">You can join existing group&#10;or create new one.</string>
+    <string name="group_text_join">Join</string>
+    <string name="group_text_create">Create</string>
+    <string name="group_text_id">ID</string>
+    <string name="group_text_name">Name</string>
+    <string name="group_text_password">Password</string>
+    <string name="group_text_add">Add</string>
+    <string name="group_message_error_enter_id">Which group would you like to join?</string>
+    <string name="group_message_error_unknown_id">Group does not exists.</string>
+    <string name="group_message_error_enter_name">What is the name of your group?</string>
+    <string name="group_message_error_enter_password">Please enter the password of the group</string>
+    <string name="group_message_error_password_not_matches">Password not matches.</string>
+    <string name="group_message_error_account">Failed due to an account error.</string>
+    <string name="group_message_error_server">Failed due to a server error.&#10;Please try again.</string>
+    <string name="group_message_ok">Group added.</string>
+    <string name="group_text_id_prefix">#</string>
+    
     <string name="calendar_text_title">Title</string>
     <string name="calendar_text_content">Content</string>
     <string name="calendar_action_collapse">Collapse</string>
@@ -60,5 +112,5 @@
     <string name="weight_chart_text_weight">Weight</string>
     <string name="weight_chart_text_push">Push</string>
     <string name="weight_chart_unit_kg">Kg</string>
-
+    
 </resources>
