@@ -43,12 +43,12 @@ public final class UpdateMemoRequest extends RequestBase<UpdateMemoRequest.EResp
     }
 
     private Account account;
-    private Animal animal;
+    private long animalId;
     private Memo.Commit commit;
 
-    public UpdateMemoRequest(@NonNull Account account, @NonNull Animal animal, @NonNull Memo.Commit commit) {
+    public UpdateMemoRequest(@NonNull Account account, long animalId, @NonNull Memo.Commit commit) {
         this.account = account;
-        this.animal = animal;
+        this.animalId = animalId;
         this.commit = commit;
     }
 
@@ -61,7 +61,7 @@ public final class UpdateMemoRequest extends RequestBase<UpdateMemoRequest.EResp
     protected void onRequest(WebSocketRequest conn) {
         try {
             conn.sendAuthentication(account);
-            conn.send(animal.getId());
+            conn.send(animalId);
             conn.send(commit);
         } catch (JSONException e) {
             e.printStackTrace();

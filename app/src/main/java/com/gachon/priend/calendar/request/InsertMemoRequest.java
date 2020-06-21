@@ -43,12 +43,12 @@ public final class InsertMemoRequest extends RequestBase<InsertMemoRequest.EResp
     }
 
     private Account account;
-    private Animal animal;
+    private long animalId;
     private Memo memo;
 
-    public InsertMemoRequest(@NonNull Account account, @NonNull Animal animal, @NonNull Memo memo) {
+    public InsertMemoRequest(@NonNull Account account, long animalId, @NonNull Memo memo) {
         this.account = account;
-        this.animal = animal;
+        this.animalId = animalId;
         this.memo = memo;
     }
 
@@ -63,7 +63,7 @@ public final class InsertMemoRequest extends RequestBase<InsertMemoRequest.EResp
 
         try {
             conn.sendAuthentication(account);
-            conn.send(animal.getId());
+            conn.send(animalId);
             conn.send(json.toString(0));
         } catch (JSONException e) {
             e.printStackTrace();

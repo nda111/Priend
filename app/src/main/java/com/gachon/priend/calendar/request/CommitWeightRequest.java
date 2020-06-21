@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.gachon.priend.calendar.WeightCommit;
+import com.gachon.priend.data.entity.Account;
 import com.gachon.priend.interaction.RequestBase;
 import com.gachon.priend.interaction.WebSocketRequest;
 import com.gachon.priend.membership.NowAccountManager;
@@ -20,13 +21,15 @@ import org.json.JSONException;
 public class CommitWeightRequest extends RequestBase<CommitWeightRequest.EResponse> {
 
     public enum EResponse {
-        OK(0), SERVER_ERROR(1);
+        OK(0), ACCOUNT_ERROR(1), SERVER_ERROR(2);
 
         public static EResponse fromId(int id) {
             switch (id) {
                 case 0:
                     return OK;
                 case 1:
+                    return ACCOUNT_ERROR;
+                case 2:
                     return SERVER_ERROR;
                 default:
                     return null;
@@ -40,11 +43,12 @@ public class CommitWeightRequest extends RequestBase<CommitWeightRequest.ERespon
         }
     }
 
-    private Context mContext;
+    private Account account;
     private WeightCommit commit;
 
     public CommitWeightRequest(@NonNull final Context context, @NonNull final WeightCommit commit) {
 
+        this.account = NowAccountManager.getAccountOrNull(context);
         this.commit = commit;
     }
 
@@ -57,7 +61,7 @@ public class CommitWeightRequest extends RequestBase<CommitWeightRequest.ERespon
     @Override
     protected void onRequest(WebSocketRequest conn) {
 
-        conn.sendAuthentication(NowAccountManager.getAccountOrNull(mContext));
+        conn.sendAuthentication(account);
         try {
             conn.send(commit);
         } catch (JSONException e) {
@@ -67,30 +71,12 @@ public class CommitWeightRequest extends RequestBase<CommitWeightRequest.ERespon
 
     @Override
     protected void onResponse(WebSocketRequest conn, WebSocketRequest.Message message, int paramNumber) {
-
-        switch (paramNumber) {
-            case 0:
-
-                super.response = EResponse.fromId(message.getBinaryMessageOrNull()[0]);
-
-                if (super.response == EResponse.SERVER_ERROR) {
-                    conn.close();
-                }
-                break;
-
-            case 1:
-
-                super.args = new Object[] { message.getAsInt32MessageOrNull() };
-                conn.close();
-                break;
-
-            default:
-                break;
-        }
+        super.response = EResponse.fromId(message.getBinaryMessageOrNull()[0]);
+        conn.close();
     }
 
     @Override
     protected void onClose() {
-
+        /* EMPTY */
     }
 }

@@ -39,12 +39,12 @@ public final class DeleteMemoRequest extends RequestBase<DeleteMemoRequest.EResp
     }
 
     private Account account;
-    private Animal animal;
+    private long animalId;
     private long memoId;
 
-    public DeleteMemoRequest(@NonNull Account account, @NonNull Animal animal, long memoId) {
+    public DeleteMemoRequest(@NonNull Account account, long animalId, long memoId) {
         this.account = account;
-        this.animal = animal;
+        this.animalId = animalId;
         this.memoId = memoId;
     }
 
@@ -56,7 +56,7 @@ public final class DeleteMemoRequest extends RequestBase<DeleteMemoRequest.EResp
     @Override
     protected void onRequest(WebSocketRequest conn) {
         conn.sendAuthentication(account);
-        conn.send(animal.getId());
+        conn.send(animalId);
         conn.send(memoId);
     }
 
