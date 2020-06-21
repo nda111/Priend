@@ -96,6 +96,8 @@
     <string name="gallery_or_camera_gallery">From gallery</string>
     <string name="gallery_or_camera_camera">Take picture</string>
 
+    <string name="record_text_title">Title</string>
+    <string name="record_text_contents">Contents</string>
     <string name="record_text_memo">Memo</string>
     <string name="record_text_delete_memo">Delete this memo</string>
     <string name="record_text_delete_photo">Delete photo</string>
@@ -106,7 +108,10 @@
     <string name="record_message_error_account">Account error</string>
     <string name="record_message_error_server">Failed due to a server error. Please try again.</string>
 
-    <string name="weight_chart_message_n_changed">changes has committed.</string>
+    <string name="weight_chart_message_n_changed">Changes has committed.</string>
+    <string name="weight_chart_message_error_required">Required</string>
+    <string name="weight_chart_message_error_no_change">There is no change.</string>
+    <string name="weight_chart_message_error_account">Failed to commit due to an account error.</string>
     <string name="weight_chart_message_error_server">Failed to commit due to a server error. Please try again.</string>
     <string name="weight_chart_text_date">Date</string>
     <string name="weight_chart_text_weight">Weight</string>
