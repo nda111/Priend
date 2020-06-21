@@ -1,89 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="8dp"
-    android:paddingTop="8dp"
     tools:context=".calendar.activity.WeightChartActivity">
 
-    <com.gachon.priend.calendar.view.SimpleChartView
-        android:id="@+id/weight_chart_simple_chart_view_weights"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1.5dp"
-        android:layout_marginHorizontal="4dp"
-        android:layout_marginVertical="4dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/grey_400"
-        app:layout_constraintTop_toBottomOf="@+id/weight_chart_simple_chart_view_weights"
-        tools:layout_editor_absoluteX="12dp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/weight_chart_text_date"
-        app:layout_constraintStart_toStartOf="@+id/weight_chart_simple_chart_view_weights"
-        app:layout_constraintTop_toBottomOf="@+id/view">
+        android:background="@color/primaryColor"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/weight_chart_edit_text_date"
-            android:layout_width="200dp"
+        <ImageButton
+            android:id="@+id/weight_chart_button_back"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:inputType="date" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
-        android:hint="@string/weight_chart_text_weight"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout2" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/weight_chart_edit_text_weight"
-            android:layout_width="100dp"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/weight_chart_text_view_name"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:inputType="number|numberDecimal" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="8dp"
+            android:text="Animal Name"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/weight_chart_button_back"
+            app:layout_constraintStart_toEndOf="@+id/weight_chart_button_back"
+            app:layout_constraintTop_toTopOf="@+id/weight_chart_button_back" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/weight_chart_button_push"
-        style="@style/Button.Filled.Rounded"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/weight_chart_text_push"
-        app:backgroundTint="@color/secondaryColor"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout3" />
+        <ImageButton
+            android:id="@+id/weight_chart_button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/weight_chart_button_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/weight_chart_button_back"
+            app:srcCompat="@drawable/ic_save_white_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.gachon.priend.calendar.view.WeightListView
-        android:id="@+id/weight_chart_weight_list_view_weights"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="8dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/weight_chart_simple_chart_view_weights"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/grey_400" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:hint="@string/weight_chart_text_date">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/weight_chart_edit_text_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:inputType="date" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/weight_chart_container_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="0.3"
+                android:hint="@string/weight_chart_text_weight"
+                app:suffixText="@string/weight_chart_unit_kg"
+                app:helperTextTextColor="@color/red_700"
+                tools:helperText="@string/weight_chart_message_error_required">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/weight_chart_edit_text_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:inputType="number|numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/weight_chart_button_push"
+                style="@style/Button.Filled.Rounded"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="0.3"
+                android:text="@string/weight_chart_text_push"
+                app:backgroundTint="@color/secondaryColor" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/weight_chart_weight_list_view_weights"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</LinearLayout>
