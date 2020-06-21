@@ -1,6 +1,7 @@
 package com.gachon.priend.membership.activity;
 
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.gachon.priend.R;
@@ -37,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
             Pattern.compile("(.{8,})")              // At least 8 characters required
     };
 
+    private ImageButton backButton = null;
     private MaterialTextView emailTextView = null;
     private TextInputLayout passwordTextInputLayout = null;
     private TextInputEditText passwordEditText = null;
@@ -44,18 +47,23 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText confirmPasswordEditText = null;
     private TextInputLayout nameTextInputLayout = null;
     private TextInputEditText nameEditText = null;
-    private MaterialButton loginButton = null;
+    private MaterialButton registerButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        final ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.hide();
+
         final Intent intent = getIntent();
 
         /*
          * Initialize GUI Components
          */
+        backButton = findViewById(R.id.register_button_back);
         emailTextView = findViewById(R.id.register_text_view_email);
         passwordTextInputLayout = findViewById(R.id.register_text_input_layout_password);
         passwordEditText = findViewById(R.id.register_edit_text_password);
@@ -63,13 +71,21 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPasswordEditText = findViewById(R.id.register_edit_text_confirm_password);
         nameTextInputLayout = findViewById(R.id.register_text_input_layout_name);
         nameEditText = findViewById(R.id.register_edit_text_name);
-        loginButton = findViewById(R.id.register_button_register);
+        registerButton = findViewById(R.id.register_button_register);
+
+        // button_back
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         // emailTextView
         emailTextView.setText(intent.getStringExtra(LoginEntryActivity.EXTRA_KEY_EMAIL));
 
-        // loginButton
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        // registerButton
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Editable password = passwordEditText.getText();
@@ -98,6 +114,8 @@ public class RegisterActivity extends AppCompatActivity {
                     showError(nameTextInputLayout, R.string.register_message_name_required);
                 } else {
 
+                    setGuiEnabled(false);
+
                     new RegisterRequest(emailTextView.getText().toString(), password.toString(), name.toString())
                             .request(new RequestBase.ResponseListener<RegisterRequest.EResponse>() {
                                 @Override
@@ -121,6 +139,8 @@ public class RegisterActivity extends AppCompatActivity {
                                                     Toast.makeText(getApplicationContext(), R.string.register_message_unexpected_error, Toast.LENGTH_LONG).show();
                                                     break;
                                             }
+
+                                            setGuiEnabled(true);
                                         }
                                     });
                                 }
@@ -128,6 +148,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setGuiEnabled(boolean enabled) {
+        backButton.setVisibility(enabled ? View.VISIBLE : View.GONE);
+        passwordEditText.setEnabled(enabled);
+        confirmPasswordEditText.setEnabled(enabled);
+        nameEditText.setEnabled(enabled);
+        registerButton.setEnabled(enabled);
     }
 
     private void showError(TextInputLayout layout, @StringRes int resId) {
