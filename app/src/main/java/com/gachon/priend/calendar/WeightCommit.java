@@ -116,7 +116,7 @@ public final class WeightCommit implements IJsonConvertible {
                         break;
 
                     case DELETE:
-                        json.put(JSON_KEY_TYPE, JSON_KEY_WEIGHT);
+                        json.put(JSON_KEY_TYPE, JSON_VALUE_DELETE);
                         json.put(JSON_KEY_DATE, date.toMillis());
                         break;
 
@@ -178,7 +178,7 @@ public final class WeightCommit implements IJsonConvertible {
      * @param data The tree data of weight
      * @param animalId The specifier of an animal
      */
-    public WeightCommit(@NonNull TreeMap<Date, Double> data, int animalId) {
+    public WeightCommit(@NonNull TreeMap<Date, Double> data, long animalId) {
 
         this.animalId = animalId;
         this.original = data;
