@@ -5,6 +5,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+
     defaultConfig {
         applicationId "com.gachon.priend"
         minSdkVersion 28
@@ -35,4 +39,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.neovisionaries:nv-websocket-client:2.9' // web socket client
     implementation "com.leinardi.android:speed-dial:3.1.1" // fab
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' // chart
 }
