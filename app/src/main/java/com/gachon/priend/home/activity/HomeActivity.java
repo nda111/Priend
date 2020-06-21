@@ -98,17 +98,20 @@ public class HomeActivity extends AppCompatActivity {
                 switch (actionItem.getId()) {
 
                     case R.id.home_speed_dial_item_settings:
-                        // todo: goto add settings activity
+                        // todo: goto add settings activity, delete toast code below
+                        Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
 
                         break;
 
                     case R.id.home_speed_dial_item_hospital:
-                        // todo: goto add map activity
+                        // todo: goto add map activity, delete toast code below
+                        Toast.makeText(getApplicationContext(), "Map", Toast.LENGTH_SHORT).show();
 
                         break;
 
                     case R.id.home_speed_dial_item_community:
-                        // todo: goto add community activity
+                        // todo: goto add community activity, delete toast code below
+                        Toast.makeText(getApplicationContext(), "Community", Toast.LENGTH_SHORT).show();
 
                         break;
                 }
@@ -192,7 +195,8 @@ public class HomeActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onAnimalClicked(@NonNull Animal animal) {
-                                        // todo: goto calendar selection activity
+                                        // todo: goto calendar selection activity, delete toast code below
+                                        Toast.makeText(getApplicationContext(), "Calendar", Toast.LENGTH_SHORT).show();
 
                                     }
                                 });

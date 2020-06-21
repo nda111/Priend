@@ -54,14 +54,21 @@ public final class EntityAdapter extends RecyclerView.Adapter<EntityAdapter.View
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return animals.get(position).getId();
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             final LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_home_animal, parent, false);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    eventHandler.onAnimalClicked(animals.get(position));
+                }
+            });
 
             final Animal animal = animals.get(position);
             final Resources resources = convertView.getResources();
@@ -209,15 +216,6 @@ public final class EntityAdapter extends RecyclerView.Adapter<EntityAdapter.View
 
                 final AnimalAdapter adapter = new AnimalAdapter(animals);
                 animalListView.setAdapter(adapter);
-                animalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        if (eventHandler != null) {
-                            eventHandler.onAnimalClicked(animals.get(position));
-                        }
-                    }
-                });
 
                 addAnimalImageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
