@@ -52,8 +52,6 @@ public final class Date implements Comparable<Date> {
         core.setTimeInMillis(timeInMillis);
     }
 
-    // 겟 하는거 범위 생각해서 1~12월, 1~31로 리턴하게 조정하기
-
     /**
      * Get the value of year
      *
@@ -87,7 +85,7 @@ public final class Date implements Comparable<Date> {
     /**
      * Set the value of month
      *
-     * @param month The value of month in [0, 12]
+     * @param month The value of month in [1, 12]
      */
     public void setMonth(int month) {
         if (month < 1) {
@@ -127,7 +125,7 @@ public final class Date implements Comparable<Date> {
      * @return Time in milli seconds
      */
     public long toMillis() {
-        core.set(getYear(), getMonth(), getDay(), 0, 0, 0);
+        core.set(getYear(), getMonth() - 1, getDay(), 0, 0, 0);
         core.set(Calendar.MILLISECOND, 0);
 
         return core.getTimeInMillis();

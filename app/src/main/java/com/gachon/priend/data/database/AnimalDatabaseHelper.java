@@ -16,6 +16,7 @@ import com.gachon.priend.data.entity.Animal;
 import com.gachon.priend.interaction.RequestBase;
 
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -152,7 +153,7 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
                     "INSERT INTO " + TABLE_NAME_ANIMAL + " VALUES(" +
                             animal.getId() + ", " +
                             animal.getSpecies() + ", " +
-                            '\'' + animal.getName() + '\'' +
+                            '\'' + animal.getName() + "', " +
                             animal.getBirthday().toMillis() + ", " +
                             animal.getSex().toShort() +
                             ");");
