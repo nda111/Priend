@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -53,11 +54,13 @@ public final class Memo implements IJsonConvertible, Parcelable {
             }
 
             if (!origin.text.equals(changed.text)) {
-                this.content = changed.title;
+                this.content = changed.text;
             }
 
-            if (!origin.getPhoto().sameAs(changed.photo)) {
-                this.photo = changed.photo;
+            if (origin.getPhoto() != null) {
+                if (!origin.getPhoto().sameAs(changed.photo)) {
+                    this.photo = changed.photo;
+                }
             }
         }
 
@@ -174,11 +177,13 @@ public final class Memo implements IJsonConvertible, Parcelable {
         this.when = new Date(in.readLong());
         this.title = in.readString();
         this.text = in.readString();
-        if (in.dataAvail() > 0) {
-            this.photo = in.readTypedObject(Bitmap.CREATOR);
-        } else {
-            this.photo = null;
-        }
+
+        //Log.d("CalendarSelectionActivity", "Remaining: " + in.dataAvail());
+        //if (in.dataAvail() > 0) {
+        //    this.photo = in.readTypedObject(Bitmap.CREATOR);
+        //} else {
+        //    this.photo = null;
+        //}
     }
 
     /**
