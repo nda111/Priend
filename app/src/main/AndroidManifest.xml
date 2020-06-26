@@ -62,21 +62,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".home.activity.HomeActivity" />
         </activity>
-                <activity android:name=".calendar.activity.CalendarSelectionActivity">
-                    <meta-data
-                        android:name="android.support.PARENT_ACTIVITY"
-                        android:value=".home.activity.HomeActivity" />
-                </activity>
-                <activity android:name=".calendar.activity.RecordActivity">
-                    <meta-data
-                        android:name="android.support.PARENT_ACTIVITY"
-                        android:value=".calendar.activity.CalendarSelectionActivity" />
-                </activity>
-                <activity android:name=".calendar.activity.WeightChartActivity">
-                    <meta-data
-                        android:name="android.support.PARENT_ACTIVITY"
-                        android:value=".calendar.activity.CalendarSelectionActivity" />
-                </activity>
+        <activity android:name=".calendar.activity.CalendarSelectionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".home.activity.HomeActivity" />
+        </activity>
+        <activity android:name=".calendar.activity.RecordActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".calendar.activity.CalendarSelectionActivity" />
+        </activity>
+        <activity android:name=".calendar.activity.WeightChartActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".calendar.activity.CalendarSelectionActivity" />
+        </activity>
+        <activity android:name=".community.activity.BulletinListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".home.activity.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
