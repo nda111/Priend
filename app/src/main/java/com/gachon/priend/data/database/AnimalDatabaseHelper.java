@@ -105,7 +105,7 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
             short sex = animalCursor.getShort(4);
             TreeMap<Date, Double> weights = new TreeMap<Date, Double>();
 
-            while (animalCursor.moveToNext()) {
+            while (weightCursor.moveToNext()) {
 
                 long when = weightCursor.getLong(1);
                 double weight = weightCursor.getDouble(2);
@@ -170,6 +170,7 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
 
             try {
                 db.execSQL("INSERT INTO " + TABLE_NAME_WEIGHTS + " VALUES(" + animal.getId() + ", " + when + ", " + weight + ");");
+                Log.d("AnimalDatabase", "write(" + animal.getId() + ", " + when + ", " + weight + ")");
             } catch (SQLiteConstraintException e) {
                 e.printStackTrace();
             }
