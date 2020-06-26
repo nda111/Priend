@@ -14,7 +14,7 @@ import com.gachon.priend.community.database.BulletinData;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
+public class BulletinAdapter extends RecyclerView.Adapter<BulletinAdapter.ItemViewHolder> {
     // adapter에 들어갈 list 입니다.
     private ArrayList<BulletinData> listData = new ArrayList<>();
 

@@ -5,16 +5,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.gachon.priend.R;
-import com.gachon.priend.community.MyAdapter;
+import com.gachon.priend.community.BulletinAdapter;
 import com.gachon.priend.community.database.BulletinData;
 
 import java.util.Arrays;
 import java.util.List;
 
 
-public class BulletinList extends AppCompatActivity {
+public class BulletinListActivity extends AppCompatActivity {
 
-    private MyAdapter adapter;
+    private BulletinAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class BulletinList extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new MyAdapter();
+        adapter = new BulletinAdapter();
         recyclerView.setAdapter(adapter);
     }
 

@@ -3,11 +3,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class CommunityDatabaseHelper extends SQLiteOpenHelper {
     public static String NAME = "post.db";
     public static int VERSION = 1;
 
-    public DatabaseHelper(Context context) {
+    public CommunityDatabaseHelper(Context context) {
         super(context, NAME, null, VERSION);
     }
 
