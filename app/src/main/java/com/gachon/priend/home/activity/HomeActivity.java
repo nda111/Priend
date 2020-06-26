@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.gachon.priend.R;
+import com.gachon.priend.calendar.activity.CalendarSelectionActivity;
 import com.gachon.priend.data.database.AnimalDatabaseHelper;
 import com.gachon.priend.data.database.Database;
 import com.gachon.priend.data.database.GroupDatabaseHelper;
@@ -195,9 +196,10 @@ public class HomeActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onAnimalClicked(@NonNull Animal animal) {
-                                        // todo: goto calendar selection activity, delete toast code below
-                                        Toast.makeText(getApplicationContext(), "Calendar", Toast.LENGTH_SHORT).show();
+                                        final Intent intent = new Intent(HomeActivity.this, CalendarSelectionActivity.class);
+                                        intent.putExtra(INTENT_KEY_ANIMAL_ID, animal.getId());
 
+                                        startActivity(intent);
                                     }
                                 });
                                 entityRecyclerView.setAdapter(adapter);

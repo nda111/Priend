@@ -54,6 +54,14 @@
 
     </style>
 
+    <style name="Button.Text.SecondaryColored" parent="@style/Widget.MaterialComponents.Button.TextButton">
+
+        <item name="rippleColor">@color/secondaryLightColor</item>
+        <item name="android:textColor">@color/secondaryDarkColor</item>
+        <item name="cornerRadius">30dp</item>
+
+    </style>
+
     <style name="TextInputLayout.SecondaryColored" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
         <item name="android:textSize">16sp</item>

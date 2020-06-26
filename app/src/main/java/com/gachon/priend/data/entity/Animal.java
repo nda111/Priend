@@ -233,6 +233,15 @@ public final class Animal extends SQLiteCompatBase<Animal, Long, AnimalDatabaseH
     }
 
     /**
+     * Set every weights for animal with specified tree map
+     *
+     * @param weights The weight map
+     */
+    public void setWeights(@NonNull TreeMap<Date, Double> weights) {
+        this.weights = weights;
+    }
+
+    /**
      * Set or update weight at a specific day
      *
      * @param date   The date measurement
@@ -301,7 +310,7 @@ public final class Animal extends SQLiteCompatBase<Animal, Long, AnimalDatabaseH
                 JSONObject pair = weightArray.getJSONObject(i);
 
                 long date = pair.getLong(JSON_KEY_WEIGHTS_DATE);
-                double value = pair.getDouble(JSON_KEY_WEIGHTS_VALUE);
+                double value = (int)(pair.getDouble(JSON_KEY_WEIGHTS_VALUE) * 100) / 100.0;
 
                 weights.put(new Date(date), value);
             }
