@@ -17,13 +17,14 @@ import java.util.ArrayList;
 public class BulletinAdapter extends RecyclerView.Adapter<BulletinAdapter.ItemViewHolder> {
     // adapter에 들어갈 list 입니다.
     private ArrayList<BulletinData> listData = new ArrayList<>();
+    private ItemSelectionListener itemSelectionListener = null;
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // LayoutInflater를 이용하여 전 단계에서 만들었던 item.xml을 inflate 시킵니다.
         // return 인자는 ViewHolder 입니다.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_row_bulletin, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bulletin_list_bulletin, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -39,6 +40,14 @@ public class BulletinAdapter extends RecyclerView.Adapter<BulletinAdapter.ItemVi
         return listData.size();
     }
 
+    public ItemSelectionListener getItemSelectionListener() {
+        return itemSelectionListener;
+    }
+
+    public void setItemSelectionListener(ItemSelectionListener itemSelectionListener) {
+        this.itemSelectionListener = itemSelectionListener;
+    }
+
     public void addItem(BulletinData data) {
         // 외부에서 item을 추가시킬 함수입니다.
         listData.add(data);
@@ -48,6 +57,7 @@ public class BulletinAdapter extends RecyclerView.Adapter<BulletinAdapter.ItemVi
     // 여기서 subView를 setting 해줍니다.
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
+        private View view;
         private TextView bulletinList;
         private TextView bulletinContent;
         private ImageView icon;
@@ -55,15 +65,29 @@ public class BulletinAdapter extends RecyclerView.Adapter<BulletinAdapter.ItemVi
         ItemViewHolder(View itemView) {
             super(itemView);
 
+            view = itemView;
             bulletinList = itemView.findViewById(R.id.row_bulletin_textview_bulletinList);
             bulletinContent = itemView.findViewById(R.id.row_bulletin_textview_bulletinContent);
-            icon = itemView.findViewById(R.id.row_bulletin_Imageview_bulletinIcon);
+            icon = itemView.findViewById(R.id.row_bulletin_image_view_bulletin_icon);
         }
 
-        void onBind(BulletinData data) {
+        void onBind(final BulletinData data) {
             bulletinList.setText(data.getTitle());
             bulletinContent.setText(data.getContent());
             icon.setImageResource(data.getResId());
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemSelectionListener != null) {
+                        itemSelectionListener.onItemSelected(data);
+                    }
+                }
+            });
         }
+    }
+
+    public interface ItemSelectionListener {
+
+        void onItemSelected(@NonNull BulletinData bulletinData);
     }
 }

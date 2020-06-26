@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.gachon.priend.R;
 import com.gachon.priend.calendar.activity.CalendarSelectionActivity;
+import com.gachon.priend.community.activity.BulletinListActivity;
 import com.gachon.priend.data.database.AnimalDatabaseHelper;
 import com.gachon.priend.data.database.Database;
 import com.gachon.priend.data.database.GroupDatabaseHelper;
@@ -111,9 +112,8 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case R.id.home_speed_dial_item_community:
-                        // todo: goto add community activity, delete toast code below
-                        Toast.makeText(getApplicationContext(), "Community", Toast.LENGTH_SHORT).show();
-
+                        Intent intent = new Intent(HomeActivity.this, BulletinListActivity.class);
+                        startActivity(intent);
                         break;
                 }
                 return false;
