@@ -117,5 +117,19 @@
     <string name="weight_chart_text_weight">Weight</string>
     <string name="weight_chart_text_push">Push</string>
     <string name="weight_chart_unit_kg">Kg</string>
-    
+
+    <string name="new_post">Add Post</string>
+    <string name="open_post">Open</string>
+    <string name="save_post">Save</string>
+    <string name="delete_post">Delete</string>
+    <string name="hint_post_title">Title</string>
+    <string name="hint_post_content">Content</string>
+    <string name="search">Search</string>
+    <string name="Toast_save">[ Saved ]</string>
+    <string name="Toast_edit">[ Edited ]</string>
+    <string name="Toast_delete">[ Delete ]</string>
+    <string name="Toast_not_save">[ No input, not saved ]</string>
+    <string name="post_last_edit_time">last edit time : </string>
+
+
 </resources>
