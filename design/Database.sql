@@ -30,14 +30,15 @@ CREATE TABLE reset_password (
 /*board*/
 CREATE TABLE board(
    id smallserial,
-   name VARCHAR(30),
+   name VARCHAR(30) NOT NULL,
+   desctipt TEXT NOT NULL,
    PRIMARY key(id)
 );
 
 /*post*/
 CREATE TABLE post(
    id bigserial,
-   board_id bigserial,
+   board_id smallint,
    writer bigserial NOT NULL,
    writetime bigint NOT NULL,
    content VARCHAR(200) NOT NULL,
