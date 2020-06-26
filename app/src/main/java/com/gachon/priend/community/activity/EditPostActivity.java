@@ -13,13 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gachon.priend.R;
-import com.gachon.priend.community.database.DatabaseHelper;
+import com.gachon.priend.community.database.CommunityDatabaseHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class EditPost extends AppCompatActivity {
-    DatabaseHelper dbHelper;
+public class EditPostActivity extends AppCompatActivity {
+    CommunityDatabaseHelper dbHelper;
     SQLiteDatabase database;
     String tableName;
     String dbName;
@@ -39,7 +39,7 @@ public class EditPost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_post);
 
-        dbHelper = new DatabaseHelper(this);
+        dbHelper = new CommunityDatabaseHelper(this);
         database = dbHelper.getWritableDatabase();
         dbName = "notepad.db";
         tableName = "noteData";
@@ -71,12 +71,12 @@ public class EditPost extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(edit_title) && TextUtils.isEmpty(edit_content)){
 //                    제목과 내용이 모두 비어있으면 삭제함.
-                    Toast.makeText(EditPost.this, R.string.Toast_not_save, Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditPostActivity.this, R.string.Toast_not_save, Toast.LENGTH_LONG).show();
                     database.delete("noteData", "_id=?", new String[] {String.valueOf(position)});
 //                    데이터베이스에서 삭제.
                     finish();
 //                    액티비티 닫기
-                    Intent intent1 = new Intent(EditPost.this, BulletinList.class);
+                    Intent intent1 = new Intent(EditPostActivity.this, BulletinListActivity.class);
                     startActivity(intent1);
 //                    메인 액티비티 호출
                     return;
@@ -91,11 +91,11 @@ public class EditPost extends AppCompatActivity {
                 contentValues.put("title", edit_title);
                 contentValues.put("content", edit_content);
                 contentValues.put("time", formatDate);
-                Toast.makeText(EditPost.this, R.string.Toast_edit, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPostActivity.this, R.string.Toast_edit, Toast.LENGTH_SHORT).show();
                 database.update("noteData", contentValues, "_id=?", new String[] {String.valueOf(position)});
 //                업데이트문 (수정)
                 finish();
-                Intent intent1 = new Intent(EditPost.this, BulletinList.class);
+                Intent intent1 = new Intent(EditPostActivity.this, BulletinListActivity.class);
                 startActivity(intent1);
             }
         });

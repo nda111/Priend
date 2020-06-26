@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.gachon.priend.R;
 
-public class ViewPost extends AppCompatActivity {
+public class ViewPostActivity extends AppCompatActivity {
     TextView textView_title;
     TextView textView_content;
     TextView textView_time;
@@ -45,7 +45,7 @@ public class ViewPost extends AppCompatActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case(MotionEvent.ACTION_DOWN):
-                Intent intent = new Intent(this, EditPost.class);
+                Intent intent = new Intent(this, EditPostActivity.class);
                 intent.putExtra("title",title);
                 intent.putExtra("content",content);
                 intent.putExtra("time", time);
@@ -59,7 +59,7 @@ public class ViewPost extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ViewPost.this, BulletinList.class);
+        Intent intent = new Intent(ViewPostActivity.this, BulletinListActivity.class);
         startActivity(intent);
         finish();
     }
