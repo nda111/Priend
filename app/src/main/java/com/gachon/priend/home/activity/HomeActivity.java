@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.gachon.priend.Map.MapActivity;
 import com.gachon.priend.R;
 import com.gachon.priend.calendar.activity.CalendarSelectionActivity;
 import com.gachon.priend.data.database.AnimalDatabaseHelper;
@@ -107,7 +108,8 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.home_speed_dial_item_hospital:
                         // todo: goto add map activity, delete toast code below
                         Toast.makeText(getApplicationContext(), "Map", Toast.LENGTH_SHORT).show();
-
+                        Intent intent = new Intent(HomeActivity.this, MapActivity.class);
+                        startActivity(intent);
                         break;
 
                     case R.id.home_speed_dial_item_community:

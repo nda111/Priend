@@ -55,7 +55,7 @@ import noman.googleplaces.PlacesListener;
 
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener{
+        ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
 
 
     private GoogleMap mMap;
@@ -73,7 +73,7 @@ public class MapActivity extends AppCompatActivity
 
 
     // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
-    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
+    String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
 
     Location mCurrentLocatiion;
@@ -142,7 +142,6 @@ public class MapActivity extends AppCompatActivity
         setDefaultLocation();
 
 
-
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -151,9 +150,8 @@ public class MapActivity extends AppCompatActivity
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
 
-
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
 
             // 2. 이미 퍼미션을 가지고 있다면
             // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
@@ -162,7 +160,7 @@ public class MapActivity extends AppCompatActivity
             startLocationUpdates(); // 3. 위치 업데이트 시작
 
 
-        }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
+        } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
 
             // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
@@ -175,7 +173,7 @@ public class MapActivity extends AppCompatActivity
                     public void onClick(View view) {
 
                         // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                        ActivityCompat.requestPermissions( MapActivity.this, REQUIRED_PERMISSIONS,
+                        ActivityCompat.requestPermissions(MapActivity.this, REQUIRED_PERMISSIONS,
                                 PERMISSIONS_REQUEST_CODE);
                     }
                 }).show();
@@ -184,12 +182,11 @@ public class MapActivity extends AppCompatActivity
             } else {
                 // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
                 // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,
+                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE);
             }
 
         }
-
 
 
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -199,7 +196,7 @@ public class MapActivity extends AppCompatActivity
             @Override
             public void onMapClick(LatLng latLng) {
 
-                Log.d( TAG, "onMapClick :");
+                Log.d(TAG, "onMapClick :");
             }
         });
     }
@@ -244,7 +241,7 @@ public class MapActivity extends AppCompatActivity
 
             Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
             showDialogForLocationServiceSetting();
-        }else {
+        } else {
 
             int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION);
@@ -252,9 +249,8 @@ public class MapActivity extends AppCompatActivity
                     Manifest.permission.ACCESS_COARSE_LOCATION);
 
 
-
             if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED ||
-                    hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED   ) {
+                    hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) {
 
                 Log.d(TAG, "startLocationUpdates : 퍼미션 안가지고 있음");
                 return;
@@ -284,7 +280,7 @@ public class MapActivity extends AppCompatActivity
             Log.d(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
-            if (mMap!=null)
+            if (mMap != null)
                 mMap.setMyLocationEnabled(true);
 
         }
@@ -304,8 +300,6 @@ public class MapActivity extends AppCompatActivity
             mFusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }
-
-
 
 
     public String getCurrentAddress(LatLng latlng) {
@@ -409,16 +403,14 @@ public class MapActivity extends AppCompatActivity
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
 
-
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
             return true;
         }
 
         return false;
 
     }
-
 
 
     /*
@@ -429,7 +421,7 @@ public class MapActivity extends AppCompatActivity
                                            @NonNull String[] permissions,
                                            @NonNull int[] grandResults) {
 
-        if ( permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
+        if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
 
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
 
@@ -446,12 +438,11 @@ public class MapActivity extends AppCompatActivity
             }
 
 
-            if ( check_result ) {
+            if (check_result) {
 
                 // 퍼미션을 허용했다면 위치 업데이트를 시작합니다.
                 startLocationUpdates();
-            }
-            else {
+            } else {
                 // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
@@ -469,7 +460,7 @@ public class MapActivity extends AppCompatActivity
                         }
                     }).show();
 
-                }else {
+                } else {
 
 
                     // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
@@ -589,8 +580,7 @@ public class MapActivity extends AppCompatActivity
 
     }
 
-    public void showPlaceInformation(LatLng location)
-    {
+    public void showPlaceInformation(LatLng location) {
         mMap.clear();//지도 클리어
 
         if (previous_marker != null)
@@ -600,7 +590,7 @@ public class MapActivity extends AppCompatActivity
                 .listener(MapActivity.this)
                 .key("AIzaSyCjYJXJBDtUulFGpmlS_2lMTxOrK20zbV8")
                 .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(300) //500 미터 내에서 검색
+                .radius(500) //500 미터 내에서 검색
                 .type(PlaceType.VETERINARY_CARE) //동물병원
                 .language("ko", "KR")
                 .build()
