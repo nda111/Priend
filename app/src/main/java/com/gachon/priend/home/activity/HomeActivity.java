@@ -29,6 +29,7 @@ import com.gachon.priend.data.database.GroupDatabaseHelper;
 import com.gachon.priend.data.entity.Account;
 import com.gachon.priend.data.entity.Animal;
 import com.gachon.priend.data.entity.Group;
+import com.gachon.priend.faq.FaqActivity;
 import com.gachon.priend.home.EntityAdapter;
 import com.gachon.priend.home.request.EntityListRequest;
 import com.gachon.priend.interaction.RequestBase;
@@ -113,7 +114,9 @@ public class HomeActivity extends AppCompatActivity {
 
                     case R.id.home_speed_dial_item_community:
                         // todo: goto add community activity, delete toast code below
-                        Toast.makeText(getApplicationContext(), "Community", Toast.LENGTH_SHORT).show();
+                        Intent intent1= new Intent(HomeActivity.this, FaqActivity.class);
+                        startActivity(intent1);
+                        //Toast.makeText(getApplicationContext(), "Community", Toast.LENGTH_SHORT).show();
 
                         break;
                 }
