@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         android:usesCleartextTraffic="true">
+        <activity android:name=".faq.FaqActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -105,4 +106,5 @@
                 android:value=".settings.activity.SettingsActivity" />
         </activity>
     </application>
+
 </manifest>
