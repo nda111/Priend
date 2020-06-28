@@ -32,6 +32,8 @@ import com.gachon.priend.home.EntityAdapter;
 import com.gachon.priend.home.request.EntityListRequest;
 import com.gachon.priend.interaction.RequestBase;
 import com.gachon.priend.membership.NowAccountManager;
+import com.gachon.priend.settings.activity.AccountSettingsActivity;
+import com.gachon.priend.settings.activity.SettingsActivity;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
@@ -99,9 +101,8 @@ public class HomeActivity extends AppCompatActivity {
                 switch (actionItem.getId()) {
 
                     case R.id.home_speed_dial_item_settings:
-                        // todo: goto add settings activity, delete toast code below
-                        Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
-
+                        final Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                        startActivity(intent);
                         break;
 
                     case R.id.home_speed_dial_item_hospital:
