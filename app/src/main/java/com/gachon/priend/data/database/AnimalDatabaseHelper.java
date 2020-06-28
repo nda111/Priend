@@ -38,6 +38,8 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
     public static final String COL_NAME_EN_US = "name_en_us";
     public static final String COL_NAME_KO_KR = "name_ko_kr";
 
+    private static boolean isFirst = true;
+
     public AnimalDatabaseHelper(@Nullable Context context) {
         super(context, Database.NAME, null, Database.VERSION);
     }
@@ -67,6 +69,18 @@ public final class AnimalDatabaseHelper extends SQLiteOpenHelper implements ISQL
                 "PRIMARY KEY (" + COL_NAME_ID + ", " + COL_NAME_WEIGHT + "), " +
                 "FOREIGN KEY (" + COL_NAME_ID + ")  REFERENCES " + TABLE_NAME_ANIMAL + "(" + COL_NAME_ID + ")" +
                 ");");
+
+        isFirst = false;
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+
+        if (isFirst) {
+            isFirst = false;
+            onUpgrade(db, Database.VERSION - 1, Database.VERSION);
+        }
     }
 
     @Override
