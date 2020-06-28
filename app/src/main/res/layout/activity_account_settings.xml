@@ -65,6 +65,7 @@
                     android:layout_weight="1"
                     android:enabled="false"
                     android:imeOptions="actionDone"
+                    android:inputType="textPersonName"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     tools:text="이름" />
