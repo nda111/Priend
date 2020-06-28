@@ -11,14 +11,19 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gachon.priend.R;
 import com.gachon.priend.data.entity.Account;
+import com.gachon.priend.interaction.RequestBase;
 import com.gachon.priend.membership.AutoLoginManager;
 import com.gachon.priend.membership.NowAccountManager;
 import com.gachon.priend.membership.activity.LoginEntryActivity;
+import com.gachon.priend.membership.request.ResetPasswordRequest;
 import com.gachon.priend.settings.OnDeleteClickListener;
 import com.gachon.priend.settings.dialog.DeleteAccountDialog;
+import com.gachon.priend.settings.request.ChangeNameRequest;
+import com.gachon.priend.settings.request.DeleteAccountRequest;
 
 public class AccountSettingsActivity extends AppCompatActivity {
 
@@ -73,7 +78,26 @@ public class AccountSettingsActivity extends AppCompatActivity {
         findViewById(R.id.account_settings_Linear_Layout_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo: reset password
+                new ResetPasswordRequest(NowAccountManager.getAccountOrNull(AccountSettingsActivity.this).getEmail()).request(new RequestBase.ResponseListener<ResetPasswordRequest.EResponse>() {
+                    @Override
+                    public void onResponse(final ResetPasswordRequest.EResponse response, Object[] args) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (response) {
+
+                                    case OK:
+                                        Toast.makeText(AccountSettingsActivity.this, R.string.reset_password_message_check_email, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case SERVER_ERROR:
+                                        Toast.makeText(AccountSettingsActivity.this, R.string.reset_password_message_error_server, Toast.LENGTH_LONG).show();
+                                        break;
+                                }
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -83,7 +107,34 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 new DeleteAccountDialog(AccountSettingsActivity.this, new OnDeleteClickListener() {
                     @Override
                     public void onDeleteClick() {
-                        // todo: delete account
+                        new DeleteAccountRequest(NowAccountManager.getAccountOrNull(AccountSettingsActivity.this)).request(new RequestBase.ResponseListener<DeleteAccountRequest.EResponse>() {
+                            @Override
+                            public void onResponse(final DeleteAccountRequest.EResponse response, Object[] args) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        switch (response) {
+
+                                            case OK:
+                                                Toast.makeText(AccountSettingsActivity.this, R.string.delete_account_message_check_email, Toast.LENGTH_LONG).show();
+
+                                                final Intent intent = new Intent(AccountSettingsActivity.this, LoginEntryActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+                                                break;
+
+                                            case ACCOUNT_ERROR:
+                                                Toast.makeText(AccountSettingsActivity.this, R.string.delete_account_message_error_account, Toast.LENGTH_LONG).show();
+                                                break;
+
+                                            case SERVER_ERROR:
+                                                Toast.makeText(AccountSettingsActivity.this, R.string.delete_account_message_error_server, Toast.LENGTH_LONG).show();
+                                                break;
+                                        }
+                                    }
+                                });
+                            }
+                        });
 
                         // do below if success
                         NowAccountManager.clear(AccountSettingsActivity.this);
@@ -103,8 +154,36 @@ public class AccountSettingsActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    // todo: request change name
+                    final String newName = nameEditText.getText().toString().trim();
 
+                    new ChangeNameRequest(NowAccountManager.getAccountOrNull(AccountSettingsActivity.this), newName).request(new RequestBase.ResponseListener<ChangeNameRequest.EResponse>() {
+                        @Override
+                        public void onResponse(final ChangeNameRequest.EResponse response, Object[] args) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    switch (response) {
+
+                                        case OK:
+                                            final Account account = NowAccountManager.getAccountOrNull(AccountSettingsActivity.this);
+                                            account.setName(newName);
+                                            NowAccountManager.setAccount(AccountSettingsActivity.this, account);
+                                            break;
+
+                                        case ACCOUNT_ERROR:
+                                            Toast.makeText(AccountSettingsActivity.this, R.string.change_name_message_error_account, Toast.LENGTH_LONG).show();
+                                            nameEditText.setText(NowAccountManager.getAccountOrNull(AccountSettingsActivity.this).getName());
+                                            break;
+
+                                        case SERVER_ERROR:
+                                            Toast.makeText(AccountSettingsActivity.this, R.string.change_name_message_error_server, Toast.LENGTH_LONG).show();
+                                            nameEditText.setText(NowAccountManager.getAccountOrNull(AccountSettingsActivity.this).getName());
+                                            break;
+                                    }
+                                }
+                            });
+                        }
+                    });
 
                     editNameImageButton.setEnabled(true);
                     nameEditText.setEnabled(false);
