@@ -102,14 +102,12 @@ public class HomeActivity extends AppCompatActivity {
                 switch (actionItem.getId()) {
 
                     case R.id.home_speed_dial_item_settings:
-                        final Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                         startActivity(intent);
                         break;
 
                     case R.id.home_speed_dial_item_hospital:
-                        // todo: goto add map activity, delete toast code below
-                        Toast.makeText(getApplicationContext(), "Map", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(HomeActivity.this, MapActivity.class);
+                        intent = new Intent(HomeActivity.this, MapActivity.class);
                         startActivity(intent);
                         break;
 

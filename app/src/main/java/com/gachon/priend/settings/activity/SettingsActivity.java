@@ -15,6 +15,8 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        getSupportActionBar().hide();
+
         findViewById(R.id.settings_image_view_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
