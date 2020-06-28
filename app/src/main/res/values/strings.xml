@@ -84,7 +84,7 @@
     <string name="group_message_error_server">Failed due to a server error.&#10;Please try again.</string>
     <string name="group_message_ok">Group added.</string>
     <string name="group_text_id_prefix">#</string>
-    
+
     <string name="calendar_text_title">Title</string>
     <string name="calendar_text_content">Content</string>
     <string name="calendar_action_collapse">Collapse</string>
@@ -117,5 +117,43 @@
     <string name="weight_chart_text_weight">Weight</string>
     <string name="weight_chart_text_push">Push</string>
     <string name="weight_chart_unit_kg">Kg</string>
-    
+
+    <string name="settings_text_settings">Setting</string>
+    <string name="settings_text_account">Account</string>
+    <string name="settings_text_alert">Alert</string>
+    <string name="settings_description_account">User name</string>
+    <string name="settings_description_alert">Push alert, Notification</string>
+
+    <string name="account_settings_text_account">Account</string>
+    <string name="account_settings_text_logout">Logout</string>
+    <string name="account_settings_text_reset_password">Reset password</string>
+    <string name="account_settings_text_delete_account">Delete account</string>
+    <string name="account_settings_description_logout">Logout and go to login page.</string>
+    <string name="account_settings_description_reset_password">Request an email to reset my password.</string>
+    <string name="account_settings_description_delete_account">Delete my account permanently.</string>
+
+    <string name="alert_settings_text_alert">Alert</string>
+    <string name="alert_settings_text_calendar">Calendar</string>
+    <string name="alert_settings_text_community">Community</string>
+    <string name="alert_settings_item_weight">On weight update</string>
+    <string name="alert_settings_item_birthday">On birthday</string>
+    <string name="alert_settings_item_event">On other event</string>
+    <string name="alert_settings_item_comment">On commented</string>
+
+    <string name="delete_account_text_warning">Warning</string>
+    <string name="delete_account_text_info1">Once you delete this account,</string>
+    <string name="delete_account_text_info2">you can NOT roll it back.</string>
+    <string name="delete_account_text_info3">Enter you email to confirm deletion.</string>
+
+    <string name="delete_account_message_error_server">Failed to commit due to a server error. Please try again.</string>
+    <string name="delete_account_message_check_email">Please check your email.</string>
+    <string name="delete_account_message_error_account">Failed to commit due to a account error. Please try again.</string>
+
+    <string name="reset_password_message_error_server">Failed to commit due to a server error. Please try again.</string>
+    <string name="reset_password_message_check_email">Please check your email.</string>
+
+    <string name="change_name_message_error_server">Failed to commit due to a server error. Please try again.</string>
+    <string name="change_name_message_check_email">Please check your email.</string>
+    <string name="change_name_message_error_account">Failed to commit due to a account error. Please try again.</string>
+
 </resources>
