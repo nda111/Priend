@@ -89,5 +89,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".home.activity.HomeActivity" />
         </activity>
+        <activity android:name=".settings.activity.SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".home.activity.HomeActivity" />
+        </activity>
+        <activity android:name=".settings.activity.AccountSettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.activity.SettingsActivity" />
+        </activity>
+        <activity android:name=".settings.activity.AlertSettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.activity.SettingsActivity" />
+        </activity>
     </application>
 </manifest>

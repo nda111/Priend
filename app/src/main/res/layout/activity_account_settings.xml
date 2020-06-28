@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageButton
+        android:id="@+id/account_settings_image_view_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="10dp"
+        android:src="@drawable/ic_arrow_back_black_24dp" />
+
+    <ImageView
+        android:id="@+id/account_settings_image_View_account"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_account"
+        android:tint="@color/secondaryDarkColor" />
+
+    <TextView
+        android:id="@+id/account_settings_text_view_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/account_settings_text_account"
+        android:textColor="@color/secondaryDarkColor"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/account_setting_scrollview_email"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/account_settings_Linear_Layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp">
+
+            <TextView
+                android:id="@+id/account_settings_text_view_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                tools:text="abcdef@naver.com" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/account_settings_text_view_edit_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    tools:text="이름" />
+
+                <ImageButton
+                    android:id="@+id/account_settings_image_view_edit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_edit" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/account_settings_Linear_Layout_logout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
+                    android:src="@drawable/ic_logout"
+                    android:tint="@color/secondaryDarkColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_settings_text_logout"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/account_settings_description_logout" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/account_settings_Linear_Layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="39dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
+                    android:src="@drawable/ic_key"
+                    android:tint="@color/secondaryDarkColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_settings_text_reset_password"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/account_settings_description_reset_password" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/account_settings_Linear_Layout_delete"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="39dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
+                    android:src="@drawable/ic_out"
+                    android:tint="@color/secondaryDarkColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_settings_text_delete_account"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/account_settings_description_delete_account" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
