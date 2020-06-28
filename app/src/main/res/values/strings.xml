@@ -145,4 +145,15 @@
     <string name="delete_account_text_info2">you can NOT roll it back.</string>
     <string name="delete_account_text_info3">Enter you email to confirm deletion.</string>
 
+    <string name="delete_account_message_error_server">Failed to commit due to a server error. Please try again.</string>
+    <string name="delete_account_message_check_email">Please check your email.</string>
+    <string name="delete_account_message_error_account">Failed to commit due to a account error. Please try again.</string>
+
+    <string name="reset_password_message_error_server">Failed to commit due to a server error. Please try again.</string>
+    <string name="reset_password_message_check_email">Please check your email.</string>
+
+    <string name="change_name_message_error_server">Failed to commit due to a server error. Please try again.</string>
+    <string name="change_name_message_check_email">Please check your email.</string>
+    <string name="change_name_message_error_account">Failed to commit due to a account error. Please try again.</string>
+
 </resources>
