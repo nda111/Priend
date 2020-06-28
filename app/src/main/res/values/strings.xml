@@ -84,7 +84,7 @@
     <string name="group_message_error_server">Failed due to a server error.&#10;Please try again.</string>
     <string name="group_message_ok">Group added.</string>
     <string name="group_text_id_prefix">#</string>
-    
+
     <string name="calendar_text_title">Title</string>
     <string name="calendar_text_content">Content</string>
     <string name="calendar_action_collapse">Collapse</string>
@@ -117,7 +117,7 @@
     <string name="weight_chart_text_weight">Weight</string>
     <string name="weight_chart_text_push">Push</string>
     <string name="weight_chart_unit_kg">Kg</string>
-    
+
     <string name="settings_text_settings">Setting</string>
     <string name="settings_text_account">Account</string>
     <string name="settings_text_alert">Alert</string>
