@@ -15,6 +15,13 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        findViewById(R.id.settings_image_view_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         findViewById(R.id.settings_container_item_account).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
