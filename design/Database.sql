@@ -1,3 +1,17 @@
+DROP TABLE weights;
+DROP TABLE managed;
+DROP TABLE participates;
+DROP TABLE animal_group;
+DROP TABLE memo;
+DROP TABLE animal;
+DROP TABLE animal_species;
+DROP TABLE comment;
+DROP TABLE post;
+DROP TABLE board;
+DROP TABLE reset_password;
+DROP TABLE verifying_hash;
+DROP TABLE account;
+
 CREATE TABLE account (
    id bigserial NOT NULL UNIQUE,
    email varchar(32),
@@ -70,7 +84,7 @@ CREATE TABLE animal (
    birth bigint NOT NULL,
    sex smallint NOT NULL,
    PRIMARY KEY (id),
-   FOREIGN KEY (id) REFERENCES animal_species(species_id)
+   FOREIGN KEY (species) REFERENCES animal_species(species_id)
 );
 
 /*calendar*/
@@ -122,3 +136,14 @@ CREATE TABLE weights (
    PRIMARY KEY (pet_id, measured),
    FOREIGN KEY (pet_id) REFERENCES animal(id) ON DELETE CASCADE
 );
+
+INSERT INTO animal_species VALUES(0, 'Cat'       , '고양이');
+INSERT INTO animal_species VALUES(1, 'Hedgehog'  , '고슴도치');
+INSERT INTO animal_species VALUES(2, 'Dog'       , '개');
+INSERT INTO animal_species VALUES(3, 'Turtle'    , '거북이');
+INSERT INTO animal_species VALUES(4, 'Guinea pig', '기니피그');
+INSERT INTO animal_species VALUES(5, 'Snail'     , '달팽이');
+INSERT INTO animal_species VALUES(6, 'Lizard'    , '도마뱀');
+INSERT INTO animal_species VALUES(7, 'Raccoon'   , '라쿤');
+INSERT INTO animal_species VALUES(8, 'Snake'     , '뱀');
+INSERT INTO animal_species VALUES(9, 'Parrot'    , '앵무새');
